@@ -22,24 +22,51 @@ class _MainScreenState extends State<MainScreen> {
     ExamScreen(),
     ProfileScreen(),
   ];
-  final _bnItem = const [
-    //  TODO : Add the bottom navigation items here
-    // BottomNavigationBarItem(
-    //     icon: SizedBox(
-    //       height: 24.0,
-    //       width: 24.0,
-    //       child: SvgPicture.asset(
-    //         'assets/svgs/pen-solid.svg',
-    //         color: Colors.red,
-    //       ),
-    //     ),
-    //     label: ''),
-    BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-    BottomNavigationBarItem(icon: Icon(Icons.play_lesson), label: ''),
+  List<BottomNavigationBarItem> _bnItem(currentIndex) => [
+        //  TODO : Add the bottom navigation items here
+        BottomNavigationBarItem(
+            icon: SizedBox(
+              height: 24.0,
+              width: 24.0,
+              child: SvgPicture.asset(
+                'assets/svgs/Vector.svg',
+                color: currentIndex == 0 ? kPrimaryColor : Colors.grey,
+              ),
+            ),
+            label: ''),
+        // BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
+        BottomNavigationBarItem(
+            icon: SizedBox(
+              height: 24.0,
+              width: 24.0,
+              child: SvgPicture.asset(
+                'assets/svgs/pen_ruler.svg',
+                color: currentIndex == 1 ? kPrimaryColor : Colors.grey,
+              ),
+            ),
+            label: ''),
 
-    BottomNavigationBarItem(icon: Icon(Icons.book), label: ''),
-    BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
-  ];
+        BottomNavigationBarItem(
+            icon: SizedBox(
+              height: 24.0,
+              width: 24.0,
+              child: SvgPicture.asset(
+                'assets/svgs/Vector-2.svg',
+                color: currentIndex == 2 ? kPrimaryColor : Colors.grey,
+              ),
+            ),
+            label: ''),
+        BottomNavigationBarItem(
+            icon: SizedBox(
+              height: 24.0,
+              width: 24.0,
+              child: SvgPicture.asset(
+                'assets/svgs/user.svg',
+                color: currentIndex == 3 ? kPrimaryColor : Colors.grey,
+              ),
+            ),
+            label: ''),
+      ];
   void changeIndex(int index) {
     setState(() {
       _currentIndex = index;
@@ -53,14 +80,61 @@ class _MainScreenState extends State<MainScreen> {
         preferredSize: const Size(double.infinity, 100.0),
         child: Container(
           height: 100.0,
-          color: Colors.red,
-          child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: const [
-                Icon(Icons.abc),
-                Icon(Icons.abc),
-                Icon(Icons.abc),
-              ]),
+          color: const Color(0xFFE0E0E0),
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 16.0),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Row(
+                    children: [
+                      SizedBox(
+                        height: 24.0,
+                        width: 24.0,
+                        child: SvgPicture.asset(
+                          'assets/svgs/fire-solid 1.svg',
+                          color: const Color(0xffEF7400),
+                        ),
+                      ),
+                      const SizedBox(width: 8.0),
+                      const Text('3 Өдөр',
+                          style:
+                              const TextStyle(color: const Color(0xffEF7400))),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(
+                        height: 24.0,
+                        width: 24.0,
+                        child: SvgPicture.asset(
+                          'assets/svgs/heart-solid 1.svg',
+                          color: const Color(0xFFEF476F),
+                        ),
+                      ),
+                      const SizedBox(width: 8.0),
+                      const Text('3 Амь',
+                          style: TextStyle(color: Color(0xFFEF476F))),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(
+                        height: 24.0,
+                        width: 24.0,
+                        child: SvgPicture.asset(
+                          'assets/svgs/coins-solid 1.svg',
+                          color: const Color(0xFFFFB51A),
+                        ),
+                      ),
+                      const SizedBox(width: 8.0),
+                      const Text('3789',
+                          style: const TextStyle(color: Color(0xFFFFB51A))),
+                    ],
+                  ),
+                ]),
+          ),
         ),
       ),
       body: _screens[_currentIndex],
@@ -73,7 +147,7 @@ class _MainScreenState extends State<MainScreen> {
         showSelectedLabels: false,
         showUnselectedLabels: false,
         iconSize: 50,
-        items: _bnItem,
+        items: _bnItem(_currentIndex),
         type: BottomNavigationBarType.fixed,
       ),
     );
