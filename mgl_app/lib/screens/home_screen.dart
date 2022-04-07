@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mgl_app/constants.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+//import 'package:mgl_app/constants.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -7,7 +8,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 18,
+      itemCount: 40,
       itemBuilder: (context, index) {
         return Container(
           decoration: BoxDecoration(
@@ -25,11 +26,13 @@ class HomeScreen extends StatelessWidget {
               ),
               const SizedBox(width: 8.0),
               Container(
-                height: 40,
-                width: 40,
+                height: 45,
+                width: 45,
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Colors.pink,
+                ),
+                child: SvgPicture.asset(
+                  'assets/svgs/circle-play-solid 8.svg',
                 ),
               ),
               const SizedBox(width: 8.0),
@@ -41,13 +44,24 @@ class HomeScreen extends StatelessWidget {
                         'Үсгийн үндсэн зурлага, эгшиг үсэг',
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontFamily: 'Nunito',
+                          fontSize: 15.0,
+                        ),
                       ),
                     ),
                     Container(
                         margin: const EdgeInsets.only(left: 8.0),
-                        height: 40.0,
+                        height: 80.0,
                         width: 40.0,
-                        child: const Center(child: const Text('13:04'))),
+                        child: const Center(
+                            child: const Text(
+                          '13:04',
+                          style: TextStyle(
+                            fontFamily: 'Nunito',
+                            fontSize: 12.0,
+                          ),
+                        ))),
                   ],
                 ),
               ),

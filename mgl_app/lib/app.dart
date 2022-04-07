@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'custom_theme_data.dart';
-import 'screens/auth/login_screen.dart';
+//import 'screens/auth/login_screen.dart';
 import 'screens/auth/splash_screen.dart';
 
 class MyApp extends StatelessWidget {

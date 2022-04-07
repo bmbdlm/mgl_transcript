@@ -18,7 +18,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
         height: MediaQuery.of(context).size.height,
         padding: const EdgeInsets.only(
             left: 16.0, right: 16.0, top: 96.0, bottom: 32.0),
-        color: const Color(0xFFFF6363),
         child: Container(
           width: MediaQuery.of(context).size.width - 32,
           height: MediaQuery.of(context).size.height - 112,
@@ -34,136 +33,148 @@ class _RegisterScreenState extends State<RegisterScreen> {
               color: Colors.transparent,
             ),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 const Text(
                   'Бүртгүүлэх',
                   style: TextStyle(
-                    color: Colors.white,
+                    fontFamily: 'Nunito',
+                    color: Colors.black,
                     fontSize: 36.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                TextField(
-                  onChanged: (value) => setState(() {}),
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: Color.fromARGB(255, 45, 38, 38),
-                    fontWeight: FontWeight.bold,
-                  ),
+                const TextField(
                   decoration: InputDecoration(
-                    hintStyle: const TextStyle(
-                      color: Color(0xff2c2e43cc),
-                    ),
-                    hintText: 'Таны нэр',
-                    fillColor: const Color.fromRGBO(255, 255, 255, 0.8),
-                    filled: true,
-                    contentPadding: const EdgeInsets.only(
-                      left: 16,
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(color: kPrimaryColor, width: 0),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(color: Colors.white10, width: 3),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    disabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: kPrimaryColor.withAlpha(0), width: 0),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: kPrimaryColor.withAlpha(0), width: 0),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  ),
+                      prefixIcon: Icon(Icons.email), hintText: 'Цахим шуудан'),
                 ),
-                TextField(
-                  onChanged: (value) => setState(() {}),
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: Color.fromARGB(255, 45, 38, 38),
-                    fontWeight: FontWeight.bold,
-                  ),
+                const TextField(
                   decoration: InputDecoration(
-                    hintStyle: const TextStyle(
-                      color: Color(0xff2c2e43cc),
-                    ),
-                    hintText: 'Цахим шуудан',
-                    fillColor: const Color.fromRGBO(255, 255, 255, 0.8),
-                    filled: true,
-                    contentPadding: const EdgeInsets.only(
-                      left: 16,
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(color: kPrimaryColor, width: 0),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(color: Colors.white10, width: 3),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    disabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: kPrimaryColor.withAlpha(0), width: 0),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: kPrimaryColor.withAlpha(0), width: 0),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  ),
+                      prefixIcon: Icon(Icons.lock), hintText: 'Нууц үг'),
                 ),
-                TextField(
-                  onChanged: (value) => setState(() {}),
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: Color.fromARGB(255, 45, 38, 38),
-                    fontWeight: FontWeight.bold,
-                  ),
+                const TextField(
                   decoration: InputDecoration(
-                    hintStyle: const TextStyle(
-                      color: Color(0xff2c2e43cc),
-                    ),
-                    hintText: 'Нууц үг',
-                    fillColor: const Color.fromRGBO(255, 255, 255, 0.8),
-                    filled: true,
-                    contentPadding: const EdgeInsets.only(
-                      left: 16,
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(color: kPrimaryColor, width: 0),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(color: Colors.white10, width: 3),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    disabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: kPrimaryColor.withAlpha(0), width: 0),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: kPrimaryColor.withAlpha(0), width: 0),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  ),
+                      prefixIcon: Icon(Icons.lock), hintText: 'Нууц үг давт'),
                 ),
+                // TextField(
+                //   onChanged: (value) => setState(() {}),
+                //   textAlign: TextAlign.center,
+                //   style: const TextStyle(
+                //     color: Color.fromARGB(255, 45, 38, 38),
+                //     fontWeight: FontWeight.bold,
+                //   ),
+                //   decoration: InputDecoration(
+                //     hintStyle: const TextStyle(
+                //       color: Color(0xff2c2e43cc),
+                //     ),
+                //     hintText: 'Таны нэр',
+                //     fillColor: const Color.fromRGBO(255, 255, 255, 0.8),
+                //     filled: true,
+                //     contentPadding: const EdgeInsets.only(
+                //       left: 16,
+                //     ),
+                //     border: OutlineInputBorder(
+                //       borderSide:
+                //           const BorderSide(color: kPrimaryColor, width: 0),
+                //       borderRadius: BorderRadius.circular(16),
+                //     ),
+                //     focusedBorder: OutlineInputBorder(
+                //       borderSide:
+                //           const BorderSide(color: Colors.white10, width: 3),
+                //       borderRadius: BorderRadius.circular(16),
+                //     ),
+                //     disabledBorder: OutlineInputBorder(
+                //       borderSide: BorderSide(
+                //           color: kPrimaryColor.withAlpha(0), width: 0),
+                //       borderRadius: BorderRadius.circular(16),
+                //     ),
+                //     enabledBorder: OutlineInputBorder(
+                //       borderSide: BorderSide(
+                //           color: kPrimaryColor.withAlpha(0), width: 0),
+                //       borderRadius: BorderRadius.circular(16),
+                //     ),
+                //   ),
+                // ),
+                // TextField(
+                //   onChanged: (value) => setState(() {}),
+                //   textAlign: TextAlign.center,
+                //   style: const TextStyle(
+                //     color: Color.fromARGB(255, 45, 38, 38),
+                //     fontWeight: FontWeight.bold,
+                //   ),
+                //   decoration: InputDecoration(
+                //     hintStyle: const TextStyle(
+                //       color: Color(0xff2c2e43cc),
+                //     ),
+                //     hintText: 'Цахим шуудан',
+                //     fillColor: const Color.fromRGBO(255, 255, 255, 0.8),
+                //     filled: true,
+                //     contentPadding: const EdgeInsets.only(
+                //       left: 16,
+                //     ),
+                //     border: OutlineInputBorder(
+                //       borderSide:
+                //           const BorderSide(color: kPrimaryColor, width: 0),
+                //       borderRadius: BorderRadius.circular(16),
+                //     ),
+                //     focusedBorder: OutlineInputBorder(
+                //       borderSide:
+                //           const BorderSide(color: Colors.white10, width: 3),
+                //       borderRadius: BorderRadius.circular(16),
+                //     ),
+                //     disabledBorder: OutlineInputBorder(
+                //       borderSide: BorderSide(
+                //           color: kPrimaryColor.withAlpha(0), width: 0),
+                //       borderRadius: BorderRadius.circular(16),
+                //     ),
+                //     enabledBorder: OutlineInputBorder(
+                //       borderSide: BorderSide(
+                //           color: kPrimaryColor.withAlpha(0), width: 0),
+                //       borderRadius: BorderRadius.circular(16),
+                //     ),
+                //   ),
+                // ),
+                // TextField(
+                //   onChanged: (value) => setState(() {}),
+                //   textAlign: TextAlign.center,
+                //   style: const TextStyle(
+                //     color: Color.fromARGB(255, 45, 38, 38),
+                //     fontWeight: FontWeight.bold,
+                //   ),
+                //   decoration: InputDecoration(
+                //     hintStyle: const TextStyle(
+                //       color: Color(0xff2c2e43cc),
+                //     ),
+                //     hintText: 'Нууц үг',
+                //     fillColor: const Color.fromRGBO(255, 255, 255, 0.8),
+                //     filled: true,
+                //     contentPadding: const EdgeInsets.only(
+                //       left: 16,
+                //     ),
+                //     border: OutlineInputBorder(
+                //       borderSide:
+                //           const BorderSide(color: kPrimaryColor, width: 0),
+                //       borderRadius: BorderRadius.circular(16),
+                //     ),
+                //     focusedBorder: OutlineInputBorder(
+                //       borderSide:
+                //           const BorderSide(color: Colors.white10, width: 3),
+                //       borderRadius: BorderRadius.circular(16),
+                //     ),
+                //     disabledBorder: OutlineInputBorder(
+                //       borderSide: BorderSide(
+                //           color: kPrimaryColor.withAlpha(0), width: 0),
+                //       borderRadius: BorderRadius.circular(16),
+                //     ),
+                //     enabledBorder: OutlineInputBorder(
+                //       borderSide: BorderSide(
+                //           color: kPrimaryColor.withAlpha(0), width: 0),
+                //       borderRadius: BorderRadius.circular(16),
+                //     ),
+                //   ),
+                // ),
                 GestureDetector(
                   onTap: () {
-                    // TODO
                     // Navigator.push(
                     //   context,
                     //   MaterialPageRoute(
@@ -187,6 +198,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         child: Text(
                           'Бүртгүүлэх',
                           style: TextStyle(
+                            fontFamily: 'Nunito',
                             fontSize: 24,
                             color: Colors.white,
                             fontWeight: FontWeight.bold,

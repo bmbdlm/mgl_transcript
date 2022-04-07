@@ -10,22 +10,31 @@ class ProfileScreen extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              margin: const EdgeInsets.only(top: 20, left: 16.0, right: 16.0),
+              margin: const EdgeInsets.only(top: 10, left: 16.0, right: 16.0),
               padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: const Color.fromRGBO(229, 229, 229, 0.5),
-              ),
+              // decoration: BoxDecoration(
+              //   borderRadius: BorderRadius.circular(20),
+              //   color: const Color.fromRGBO(229, 229, 229, 0.5),
+              // ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
                     children: [
                       Text(
-                        'Бат  Дорж',
+                        'Byambadulam Altangerel',
+                        maxLines: 2,
                         style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18.0),
+                          fontFamily: 'Nunito',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18.0,
+                        ),
                       ),
+                      Text(
+                        'boa-7515',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(fontFamily: 'Nunito'),
+                      )
                     ],
                   ),
                   Container(
@@ -40,11 +49,21 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(
+              height: 20,
+              child: Text(
+                'Статистик',
+                style: TextStyle(
+                    fontSize: 18.0,
+                    fontFamily: 'Nunito',
+                    fontWeight: FontWeight.w700),
+                textAlign: TextAlign.left,
+              ),
+            ),
             GridView.count(
               shrinkWrap: true,
               crossAxisCount: 2,
-              childAspectRatio: 9 / 6,
+              childAspectRatio: 10 / 6,
               children: [
                 StatisticWidget(
                   text: 'Нийт суралцсан цаг',
@@ -59,11 +78,23 @@ class ProfileScreen extends StatelessWidget {
                   svgPath: Icons.graphic_eq_outlined,
                 ),
                 StatisticWidget(
-                  text: 'Нийт хичээлийнпроцесс',
+                  text: 'Нийт хичээлийн процесс',
                   svgPath: Icons.percent,
                 ),
               ],
-            )
+            ),
+            const SizedBox(height: 10),
+            const SizedBox(
+              height: 25,
+              child: Text(
+                'Тохиргоо',
+                style: TextStyle(
+                    fontSize: 18.0,
+                    fontFamily: 'Nunito',
+                    fontWeight: FontWeight.w700),
+                textAlign: TextAlign.left,
+              ),
+            ),
           ],
         ),
       ),

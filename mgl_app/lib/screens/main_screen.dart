@@ -21,13 +21,13 @@ class _MainScreenState extends State<MainScreen> {
     CaliScreen(),
     ExamScreen(),
     ProfileScreen(),
+    ExamScreen(),
   ];
   List<BottomNavigationBarItem> _bnItem(currentIndex) => [
-        //  TODO : Add the bottom navigation items here
         BottomNavigationBarItem(
             icon: SizedBox(
-              height: 24.0,
-              width: 24.0,
+              height: 35.0,
+              width: 35.0,
               child: SvgPicture.asset(
                 'assets/svgs/Vector.svg',
                 color: currentIndex == 0 ? kPrimaryColor : Colors.grey,
@@ -37,8 +37,8 @@ class _MainScreenState extends State<MainScreen> {
         // BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
         BottomNavigationBarItem(
             icon: SizedBox(
-              height: 24.0,
-              width: 24.0,
+              height: 35.0,
+              width: 35.0,
               child: SvgPicture.asset(
                 'assets/svgs/pen_ruler.svg',
                 color: currentIndex == 1 ? kPrimaryColor : Colors.grey,
@@ -48,18 +48,18 @@ class _MainScreenState extends State<MainScreen> {
 
         BottomNavigationBarItem(
             icon: SizedBox(
-              height: 24.0,
-              width: 24.0,
+              height: 35.0,
+              width: 35.0,
               child: SvgPicture.asset(
-                'assets/svgs/Vector-2.svg',
+                'assets/svgs/Vector-4.svg',
                 color: currentIndex == 2 ? kPrimaryColor : Colors.grey,
               ),
             ),
             label: ''),
         BottomNavigationBarItem(
             icon: SizedBox(
-              height: 24.0,
-              width: 24.0,
+              height: 35.0,
+              width: 35.0,
               child: SvgPicture.asset(
                 'assets/svgs/user.svg',
                 color: currentIndex == 3 ? kPrimaryColor : Colors.grey,
@@ -79,7 +79,7 @@ class _MainScreenState extends State<MainScreen> {
       appBar: PreferredSize(
         preferredSize: const Size(double.infinity, 100.0),
         child: Container(
-          height: 100.0,
+          height: 85.0,
           color: const Color(0xFFE0E0E0),
           child: Padding(
             padding: const EdgeInsets.only(bottom: 16.0),
@@ -90,47 +90,59 @@ class _MainScreenState extends State<MainScreen> {
                   Row(
                     children: [
                       SizedBox(
-                        height: 24.0,
-                        width: 24.0,
+                        height: 28.0,
+                        width: 28.0,
                         child: SvgPicture.asset(
                           'assets/svgs/fire-solid 1.svg',
                           color: const Color(0xffEF7400),
                         ),
                       ),
                       const SizedBox(width: 8.0),
-                      const Text('3 Өдөр',
-                          style:
-                              const TextStyle(color: const Color(0xffEF7400))),
+                      const Text('3 өдөр',
+                          style: const TextStyle(
+                              color: const Color(0xffEF7400),
+                              fontFamily: 'Nunito',
+                              fontSize: 18.0)),
                     ],
                   ),
                   Row(
                     children: [
                       SizedBox(
-                        height: 24.0,
-                        width: 24.0,
+                        height: 28.0,
+                        width: 28.0,
                         child: SvgPicture.asset(
                           'assets/svgs/heart-solid 1.svg',
                           color: const Color(0xFFEF476F),
                         ),
                       ),
                       const SizedBox(width: 8.0),
-                      const Text('3 Амь',
-                          style: TextStyle(color: Color(0xFFEF476F))),
+                      const Text('3',
+                          style: TextStyle(
+                              color: Color(0xFFEF476F),
+                              fontFamily: 'Nunito',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18.0)),
                     ],
                   ),
                   Row(
                     children: [
                       SizedBox(
-                        height: 24.0,
-                        width: 24.0,
+                        height: 28.0,
+                        width: 28.0,
                         child: SvgPicture.asset(
                           'assets/svgs/coins-solid 1.svg',
                           color: const Color(0xFFFFB51A),
                         ),
                       ),
                       const SizedBox(width: 8.0),
-                      const Text('3789',
-                          style: const TextStyle(color: Color(0xFFFFB51A))),
+                      const Text(
+                        '3789',
+                        style: const TextStyle(
+                            color: Color(0xFFFFB51A),
+                            fontFamily: 'Nunito',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0),
+                      ),
                     ],
                   ),
                 ]),

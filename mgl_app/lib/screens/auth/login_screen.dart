@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+//import 'package:flutter_svg/svg.dart';
 import 'package:mgl_app/constants.dart';
 import 'package:mgl_app/screens/auth/register_screen.dart';
 import 'package:mgl_app/screens/main_screen.dart';
@@ -11,6 +11,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: kDesktopPadding * 2),
         width: double.infinity,
@@ -29,14 +30,16 @@ class LoginScreen extends StatelessWidget {
                   ),
                   const TextField(
                     decoration: InputDecoration(
-                        icon: Icon(Icons.attachment_sharp),
+                        fillColor: Colors.transparent,
+                        prefixIcon: Icon(Icons.email),
                         border: UnderlineInputBorder(),
                         hintText: 'Цахим шуудан'),
                   ),
                   const SizedBox(height: kDesktopPadding),
                   const TextField(
                     decoration: InputDecoration(
-                        icon: Icon(Icons.lock),
+                        fillColor: Colors.transparent,
+                        prefixIcon: Icon(Icons.lock),
                         border: UnderlineInputBorder(),
                         hintText: 'Нууц үг'),
                   ),
@@ -68,6 +71,7 @@ class LoginScreen extends StatelessWidget {
                           child: Text(
                             'Нэвтрэх',
                             style: TextStyle(
+                              fontFamily: 'Nunito',
                               fontSize: 24,
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -86,7 +90,10 @@ class LoginScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const Text('Та доорх төрлүүдээр нэвтэрч болно'),
+                  const Text(
+                    'Та доорх төрлүүдээр нэвтэрч болно',
+                    style: TextStyle(fontFamily: 'Nunito'),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -110,7 +117,8 @@ class LoginScreen extends StatelessWidget {
                   RichText(
                     text: TextSpan(
                       text: 'Шинээр бүртгэл үүсгэх үү?',
-                      style: const TextStyle(color: Colors.black),
+                      style: const TextStyle(
+                          color: Colors.black, fontFamily: 'Nunito'),
                       children: <TextSpan>[
                         TextSpan(
                           recognizer: TapGestureRecognizer()
