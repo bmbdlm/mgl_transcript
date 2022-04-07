@@ -19,11 +19,10 @@ class ExamScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-              print('Tapped on a container');
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => YoutubeVideo(),
+                  builder: (context) => ExamsScreen(),
                 ),
               );
             },
