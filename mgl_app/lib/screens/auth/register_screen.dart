@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mgl_app/screens/main_screen.dart';
 
 import '../../constants.dart';
 
@@ -10,6 +12,8 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  late String _email, _password;
+  final auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +37,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               color: Colors.transparent,
             ),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 const Text(
                   'Бүртгүүлэх',
@@ -44,18 +48,45 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const TextField(
+                TextField(
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.email), hintText: 'Цахим шуудан'),
+                  onChanged: (value) {
+                    setState(() {
+                      _email = value.trim();
+                    });
+                  },
                 ),
-                const TextField(
+                TextField(
+                  obscureText: true,
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.lock), hintText: 'Нууц үг'),
+                  onChanged: (value) {
+                    setState(() {
+                      _password = value.trim();
+                    });
+                  },
                 ),
-                const TextField(
-                  decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.lock), hintText: 'Нууц үг давт'),
-                ),
+                ElevatedButton(
+                    child: Text(
+                      'Burtguuleh',
+                      style: TextStyle(
+                        fontFamily: 'Nunito',
+                        fontSize: 24,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onPressed: () {
+                      auth.createUserWithEmailAndPassword(
+                          email: _email, password: _password);
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => MainScreen()));
+                    }),
+                // TextField(
+                //   decoration: InputDecoration(
+                //       prefixIcon: Icon(Icons.lock), hintText: 'Нууц үг давт'),
+                // ),
                 // TextField(
                 //   onChanged: (value) => setState(() {}),
                 //   textAlign: TextAlign.center,
@@ -173,41 +204,41 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 //     ),
                 //   ),
                 // ),
-                GestureDetector(
-                  onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => const MainScreen(),
-                    //   ),
-                    // );
-                  },
-                  child: PhysicalModel(
-                    elevation: 24.0,
-                    clipBehavior: Clip.hardEdge,
-                    borderRadius: BorderRadius.circular(25),
-                    color: kPrimaryColor,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(kDesktopPadding),
-                        color: kPrimaryColor,
-                      ),
-                      height: 55.0,
-                      width: 210,
-                      child: const Center(
-                        child: Text(
-                          'Бүртгүүлэх',
-                          style: TextStyle(
-                            fontFamily: 'Nunito',
-                            fontSize: 24,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                // GestureDetector(
+                //   onTap: () {
+                //     // Navigator.push(
+                //     //   context,
+                //     //   MaterialPageRoute(
+                //     //     builder: (context) => const MainScreen(),
+                //     //   ),
+                //     // );
+                //   },
+                //   child: PhysicalModel(
+                //     elevation: 24.0,
+                //     clipBehavior: Clip.hardEdge,
+                //     borderRadius: BorderRadius.circular(25),
+                //     color: kPrimaryColor,
+                //     child: Container(
+                //       decoration: BoxDecoration(
+                //         borderRadius: BorderRadius.circular(kDesktopPadding),
+                //         color: kPrimaryColor,
+                //       ),
+                //       height: 55.0,
+                //       width: 210,
+                //       child: const Center(
+                //         child: Text(
+                //           'Бүртгүүлэх',
+                //           style: TextStyle(
+                //             fontFamily: 'Nunito',
+                //             fontSize: 24,
+                //             color: Colors.white,
+                //             fontWeight: FontWeight.bold,
+                //           ),
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),

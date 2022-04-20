@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: CustomTheme.primary,
       themeMode: ThemeMode.light,
       home: const SplashScreen(),

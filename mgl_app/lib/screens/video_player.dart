@@ -21,8 +21,7 @@ class _YoutubeVideoState extends State<YoutubeVideo> {
   bool _isPlayerReady = false;
 
   final List<String> _ids = [
-    'nPt8bK2gbaU',
-    'gQDByCdjUXw',
+    'VlOHUOFEA3c',
     'iLnmTe5Q2Qw',
     '_WoCV4c6XOE',
     'KmzdUe0RSJo',

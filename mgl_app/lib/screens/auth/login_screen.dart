@@ -2,11 +2,20 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_svg/svg.dart';
 import 'package:mgl_app/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mgl_app/screens/auth/register_screen.dart';
 import 'package:mgl_app/screens/main_screen.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  late String _email, _password;
+  final auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -28,59 +37,90 @@ class LoginScreen extends StatelessWidget {
                       'assets/images/login_image.png',
                     ),
                   ),
-                  const TextField(
+                  TextField(
                     decoration: InputDecoration(
                         fillColor: Colors.transparent,
                         prefixIcon: Icon(Icons.email),
                         border: UnderlineInputBorder(),
                         hintText: 'Цахим шуудан'),
+                    onChanged: (value) {
+                      setState(() {
+                        _email = value.trim();
+                      });
+                    },
                   ),
                   const SizedBox(height: kDesktopPadding),
-                  const TextField(
+                  TextField(
+                    obscureText: true,
                     decoration: InputDecoration(
                         fillColor: Colors.transparent,
                         prefixIcon: Icon(Icons.lock),
                         border: UnderlineInputBorder(),
                         hintText: 'Нууц үг'),
+                    onChanged: (value) {
+                      setState(() {
+                        _password = value.trim();
+                      });
+                    },
                   ),
                   const SizedBox(
                     height: kDesktopPadding * 2.5,
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const MainScreen(),
-                        ),
-                      );
-                    },
-                    child: PhysicalModel(
-                      elevation: 24.0,
-                      clipBehavior: Clip.hardEdge,
-                      borderRadius: BorderRadius.circular(25),
-                      color: kPrimaryColor,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(kDesktopPadding),
-                          color: kPrimaryColor,
-                        ),
-                        height: 55.0,
-                        width: 210,
-                        child: const Center(
-                          child: Text(
-                            'Нэвтрэх',
-                            style: TextStyle(
-                              fontFamily: 'Nunito',
-                              fontSize: 24,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                  ElevatedButton(
+                      child: Text(
+                        'Newtreh',
+                        style: TextStyle(
+                          fontFamily: 'Nunito',
+                          fontSize: 24,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ),
-                  ),
+                      onPressed: () {
+                        auth.signInWithEmailAndPassword(
+                            email: _email, password: _password);
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => MainScreen()));
+                      }),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     auth.signInWithEmailAndPassword(
+                  //         email: _email, password: _password);
+                  //     Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  //         builder: (context) => MainScreen()));
+                  //     // Navigator.push(
+                  //     //   context,
+                  //     //   MaterialPageRoute(
+                  //     //     builder: (context) => const MainScreen(),
+                  //     //   ),
+                  //     // );
+                  //   },
+                  //   child: PhysicalModel(
+                  //     elevation: 24.0,
+                  //     clipBehavior: Clip.hardEdge,
+                  //     borderRadius: BorderRadius.circular(25),
+                  //     color: kPrimaryColor,
+                  //     child: Container(
+                  //       decoration: BoxDecoration(
+                  //         borderRadius: BorderRadius.circular(kDesktopPadding),
+                  //         color: kPrimaryColor,
+                  //       ),
+                  //       height: 55.0,
+                  //       width: 210,
+                  //       child: const Center(
+                  //         child: Text(
+                  //           'Нэвтрэх',
+                  //           style: TextStyle(
+                  //             fontFamily: 'Nunito',
+                  //             fontSize: 24,
+                  //             color: Colors.white,
+                  //             fontWeight: FontWeight.bold,
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),
