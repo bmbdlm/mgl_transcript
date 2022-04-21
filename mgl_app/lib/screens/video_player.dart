@@ -22,13 +22,6 @@ class _YoutubeVideoState extends State<YoutubeVideo> {
 
   final List<String> _ids = [
     'VlOHUOFEA3c',
-    'iLnmTe5Q2Qw',
-    '_WoCV4c6XOE',
-    'KmzdUe0RSJo',
-    '6jZDSSZZxjQ',
-    'p2lYr3vM_1w',
-    '7QUtEmBT_-w',
-    '34_PXCzGw1M',
   ];
 
   @override

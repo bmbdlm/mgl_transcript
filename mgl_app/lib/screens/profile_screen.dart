@@ -1,10 +1,18 @@
+import 'dart:developer';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mgl_app/data/globals.dart' as globals;
+import 'package:mgl_app/screens/auth/login_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    late String _email, _password;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -12,10 +20,6 @@ class ProfileScreen extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(top: 10, left: 16.0, right: 16.0),
               padding: const EdgeInsets.all(20),
-              // decoration: BoxDecoration(
-              //   borderRadius: BorderRadius.circular(20),
-              //   color: const Color.fromRGBO(229, 229, 229, 0.5),
-              // ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -31,7 +35,7 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'boa-7515',
+                        '${globals.auth.currentUser!.uid.toString()}',
                         textAlign: TextAlign.left,
                         style: TextStyle(fontFamily: 'Nunito'),
                       )
@@ -95,6 +99,21 @@ class ProfileScreen extends StatelessWidget {
                 textAlign: TextAlign.left,
               ),
             ),
+            ElevatedButton(
+                child: Text(
+                  'Garah',
+                  style: TextStyle(
+                    fontFamily: 'Nunito',
+                    fontSize: 24,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                onPressed: () {
+                  globals.auth.signOut();
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => LoginScreen()));
+                }),
           ],
         ),
       ),

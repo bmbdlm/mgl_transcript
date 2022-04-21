@@ -1,22 +1,32 @@
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mgl_app/constants.dart';
 import 'package:mgl_app/screens/profile_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mgl_app/data/globals.dart' as globals;
+import 'package:mgl_app/data/database.dart';
 
+import '../data/user.dart';
 import 'cali_screen.dart';
 import 'exam_screen.dart';
 import 'home_screen.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  MainScreen({Key? key}) : super(key: key);
+
+  final user = globals.auth.currentUser;
 
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
+  //MyUser authenticatedUser = await DatabaseService().getData();
   int _currentIndex = 0;
-  final _screens = const [
+  final _screens = [
     HomeScreen(),
     CaliScreen(),
     ExamScreen(),
@@ -78,76 +88,80 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size(double.infinity, 100.0),
-        child: Container(
-          height: 85.0,
-          color: const Color(0xFFE0E0E0),
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 16.0),
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Row(
-                    children: [
-                      SizedBox(
-                        height: 28.0,
-                        width: 28.0,
-                        child: SvgPicture.asset(
-                          'assets/svgs/fire-solid 1.svg',
-                          color: const Color(0xffEF7400),
+        child: FutureBuilder<MyUser?>(
+            future: DatabaseService().getData(),
+            builder: (context, snapshot) {
+              return Container(
+                height: 85.0,
+                color: const Color(0xFFE0E0E0),
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 28.0,
+                              width: 28.0,
+                              child: SvgPicture.asset(
+                                'assets/svgs/fire-solid 1.svg',
+                                color: const Color(0xffEF7400),
+                              ),
+                            ),
+                            const SizedBox(width: 8.0),
+                            Text('${snapshot.data?.daysStreak} өдөр',
+                                style: const TextStyle(
+                                    color: const Color(0xffEF7400),
+                                    fontFamily: 'Nunito',
+                                    fontSize: 18.0)),
+                          ],
                         ),
-                      ),
-                      const SizedBox(width: 8.0),
-                      const Text('3 өдөр',
-                          style: const TextStyle(
-                              color: const Color(0xffEF7400),
-                              fontFamily: 'Nunito',
-                              fontSize: 18.0)),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(
-                        height: 28.0,
-                        width: 28.0,
-                        child: SvgPicture.asset(
-                          'assets/svgs/heart-solid 1.svg',
-                          color: const Color(0xFFEF476F),
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 28.0,
+                              width: 28.0,
+                              child: SvgPicture.asset(
+                                'assets/svgs/heart-solid 1.svg',
+                                color: const Color(0xFFEF476F),
+                              ),
+                            ),
+                            const SizedBox(width: 8.0),
+                            Text('${snapshot.data?.health}',
+                                style: TextStyle(
+                                    color: Color(0xFFEF476F),
+                                    fontFamily: 'Nunito',
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18.0)),
+                          ],
                         ),
-                      ),
-                      const SizedBox(width: 8.0),
-                      const Text('3',
-                          style: TextStyle(
-                              color: Color(0xFFEF476F),
-                              fontFamily: 'Nunito',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18.0)),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(
-                        height: 28.0,
-                        width: 28.0,
-                        child: SvgPicture.asset(
-                          'assets/svgs/coins-solid 1.svg',
-                          color: const Color(0xFFFFB51A),
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 28.0,
+                              width: 28.0,
+                              child: SvgPicture.asset(
+                                'assets/svgs/coins-solid 1.svg',
+                                color: const Color(0xFFFFB51A),
+                              ),
+                            ),
+                            const SizedBox(width: 8.0),
+                            Text(
+                              '${snapshot.data?.exp}',
+                              style: const TextStyle(
+                                  color: Color(0xFFFFB51A),
+                                  fontFamily: 'Nunito',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18.0),
+                            ),
+                          ],
                         ),
-                      ),
-                      const SizedBox(width: 8.0),
-                      const Text(
-                        '3789',
-                        style: const TextStyle(
-                            color: Color(0xFFFFB51A),
-                            fontFamily: 'Nunito',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18.0),
-                      ),
-                    ],
-                  ),
-                ]),
-          ),
-        ),
+                      ]),
+                ),
+              );
+            }),
       ),
       body: _screens[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(

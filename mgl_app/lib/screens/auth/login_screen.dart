@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_svg/svg.dart';
@@ -5,6 +7,7 @@ import 'package:mgl_app/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mgl_app/screens/auth/register_screen.dart';
 import 'package:mgl_app/screens/main_screen.dart';
+import 'package:mgl_app/data/globals.dart' as globals;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -15,7 +18,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   late String _email, _password;
-  final auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -77,10 +79,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       onPressed: () {
-                        auth.signInWithEmailAndPassword(
+                        globals.auth.signInWithEmailAndPassword(
                             email: _email, password: _password);
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (context) => MainScreen()));
+                        // log("end irsse");
+                        // log(globals.auth.currentUser!.uid.toString());
                       }),
                   // GestureDetector(
                   //   onTap: () {

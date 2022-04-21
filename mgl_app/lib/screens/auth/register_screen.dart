@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mgl_app/screens/main_screen.dart';
 
 import '../../constants.dart';
+import 'package:mgl_app/data/globals.dart' as globals;
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -78,8 +81,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                     onPressed: () {
-                      auth.createUserWithEmailAndPassword(
-                          email: _email, password: _password);
+                      globals.auth
+                          .createUserWithEmailAndPassword(
+                              email: _email, password: _password)
+                          .then((value) =>
+                              log(globals.auth.currentUser!.uid.toString()));
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
                           builder: (context) => MainScreen()));
                     }),
