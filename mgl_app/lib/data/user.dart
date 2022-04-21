@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_this
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MyUser {
@@ -17,7 +19,7 @@ class MyUser {
     this.exp = ex;
     this.health = he;
     this.learnedTime = lt;
-    this.name = na;
+    name = na;
     this.notification = no;
     this.registrationDate = rd;
     this.skipped = s;

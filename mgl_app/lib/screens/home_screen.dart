@@ -1,12 +1,10 @@
-import 'dart:developer';
+// ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mgl_app/screens/video_player.dart';
-import 'package:firebase_core/firebase_core.dart';
 
-import 'lesson_detail_screen.dart';
 //import 'package:mgl_app/constants.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -17,15 +15,15 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 20),
+      padding: const EdgeInsets.symmetric(vertical: 20),
       child: StreamBuilder<QuerySnapshot>(
         stream: lessons,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
-            return Text('Something went wrong');
+            return const Text('Something went wrong');
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Text('Loading');
+            return const Text('Loading');
           }
           final data = snapshot.requireData;
 
@@ -93,7 +91,7 @@ class HomeScreen extends StatelessWidget {
                                 '${data.docs[index]['name']}',
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontFamily: 'Nunito',
                                   fontSize: 15.0,
                                 ),
@@ -106,7 +104,7 @@ class HomeScreen extends StatelessWidget {
                                 child: Center(
                                     child: Text(
                                   '${formatedTime(data.docs[index]['time'])}',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontFamily: 'Nunito',
                                     fontSize: 12.0,
                                   ),

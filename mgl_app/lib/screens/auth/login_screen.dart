@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_svg/svg.dart';
 import 'package:mgl_app/constants.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mgl_app/screens/auth/register_screen.dart';
 import 'package:mgl_app/screens/main_screen.dart';
 import 'package:mgl_app/data/globals.dart' as globals;
@@ -40,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   TextField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         fillColor: Colors.transparent,
                         prefixIcon: Icon(Icons.email),
                         border: UnderlineInputBorder(),
@@ -54,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: kDesktopPadding),
                   TextField(
                     obscureText: true,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         fillColor: Colors.transparent,
                         prefixIcon: Icon(Icons.lock),
                         border: UnderlineInputBorder(),
@@ -69,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: kDesktopPadding * 2.5,
                   ),
                   ElevatedButton(
-                      child: Text(
+                      child: const Text(
                         'Newtreh',
                         style: TextStyle(
                           fontFamily: 'Nunito',
@@ -79,6 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       onPressed: () {
+                        globals.auth.signOut();
                         globals.auth.signInWithEmailAndPassword(
                             email: _email, password: _password);
                         Navigator.of(context).pushReplacement(MaterialPageRoute(

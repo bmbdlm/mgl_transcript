@@ -1,10 +1,8 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'data/globals.dart' as globals;
 
 import 'custom_theme_data.dart';
-//import 'screens/auth/login_screen.dart';
 import 'screens/auth/splash_screen.dart';
 
 class MyApp extends StatelessWidget {

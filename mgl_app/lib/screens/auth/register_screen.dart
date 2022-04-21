@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -7,6 +9,8 @@ import 'package:mgl_app/screens/main_screen.dart';
 import '../../constants.dart';
 import 'package:mgl_app/data/globals.dart' as globals;
 
+import '../../data/database.dart';
+
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
 
@@ -15,7 +19,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  late String _email, _password;
+  late String _email, _password, _username;
   final auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
@@ -52,7 +56,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
                 TextField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
+                      prefixIcon: Icon(Icons.email),
+                      hintText: 'Herelegchiin ner'),
+                  onChanged: (value) {
+                    setState(() {
+                      _username = value.trim();
+                    });
+                  },
+                ),
+                TextField(
+                  decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.email), hintText: 'Цахим шуудан'),
                   onChanged: (value) {
                     setState(() {
@@ -62,7 +76,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 TextField(
                   obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.lock), hintText: 'Нууц үг'),
                   onChanged: (value) {
                     setState(() {
@@ -71,7 +85,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   },
                 ),
                 ElevatedButton(
-                    child: Text(
+                    child: const Text(
                       'Burtguuleh',
                       style: TextStyle(
                         fontFamily: 'Nunito',
@@ -80,12 +94,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    onPressed: () {
-                      globals.auth
+                    onPressed: () async {
+                      String userId = ' ';
+                      await FirebaseAuth.instance
                           .createUserWithEmailAndPassword(
                               email: _email, password: _password)
-                          .then((value) =>
-                              log(globals.auth.currentUser!.uid.toString()));
+                          .then((value) => userId = value.user!.uid.toString());
+                      DatabaseService().addUser(userId, _username);
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
                           builder: (context) => MainScreen()));
                     }),

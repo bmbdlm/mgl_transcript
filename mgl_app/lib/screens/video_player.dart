@@ -1,10 +1,13 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: unused_field, prefer_final_fields, unused_element, unnecessary_const
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class YoutubeVideo extends StatefulWidget {
+  const YoutubeVideo({Key? key}) : super(key: key);
+
   @override
   _YoutubeVideoState createState() => _YoutubeVideoState();
 }
@@ -120,6 +123,7 @@ class _YoutubeVideoState extends State<YoutubeVideo> {
               'Хичээл',
               style: TextStyle(color: Colors.black),
             ),
+            // ignore: prefer_const_literals_to_create_immutables
             actions: [],
           ),
           body: ListView(

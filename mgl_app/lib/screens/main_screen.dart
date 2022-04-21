@@ -1,11 +1,9 @@
-import 'dart:developer';
+// ignore_for_file: prefer_const_constructors, unnecessary_const
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mgl_app/constants.dart';
 import 'package:mgl_app/screens/profile_screen.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mgl_app/data/globals.dart' as globals;
 import 'package:mgl_app/data/database.dart';
 

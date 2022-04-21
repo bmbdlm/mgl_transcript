@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 
 class CaliScreen extends StatelessWidget {
@@ -7,7 +9,7 @@ class CaliScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SingleChildScrollView(
-      padding: EdgeInsets.fromLTRB(0, 20.0, 0, 0),
+      padding: const EdgeInsets.fromLTRB(0, 20.0, 0, 0),
       child: Column(children: [
         const SizedBox(
           height: 40,
@@ -24,7 +26,7 @@ class CaliScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text(
+            const Text(
               'Үе/үсэг',
               textAlign: TextAlign.left,
               style: TextStyle(
@@ -32,21 +34,21 @@ class CaliScreen extends StatelessWidget {
                 fontSize: 16.0,
               ),
             ),
-            Text(
+            const Text(
               'Эхэн',
               style: TextStyle(
                 fontFamily: 'Nunito',
                 fontSize: 16.0,
               ),
             ),
-            Text(
+            const Text(
               'Дунд',
               style: TextStyle(
                 fontFamily: 'Nunito',
                 fontSize: 16.0,
               ),
             ),
-            Text(
+            const Text(
               'Адаг',
               style: TextStyle(
                 fontFamily: 'Nunito',

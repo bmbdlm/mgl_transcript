@@ -7,16 +7,16 @@ class ExamsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          padding: EdgeInsets.fromLTRB(50, 100, 20, 30),
+          padding: const EdgeInsets.fromLTRB(50, 100, 20, 30),
           child: Column(
             children: [
-              Text(
+              const Text(
                 '1. Дараах хариултуудаас зөв хариултыг олно уу?',
                 style: TextStyle(fontFamily: 'Nunito', fontSize: 20.0),
               ),
               Container(
-                decoration: BoxDecoration(),
-                child: Text('Хариулт 1'),
+                decoration: const BoxDecoration(),
+                child: const Text('Хариулт 1'),
               ),
             ],
           )),
