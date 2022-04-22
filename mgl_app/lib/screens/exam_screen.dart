@@ -14,7 +14,7 @@ class ExamScreen extends StatelessWidget {
         itemCount: 4,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          childAspectRatio: 0.71,
+          childAspectRatio: 0.64,
           mainAxisSpacing: 0.0,
           crossAxisSpacing: 0.0,
         ),
@@ -41,28 +41,13 @@ class ExamScreen extends StatelessWidget {
                   maxLines: 2,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontFamily: 'Nunito',
-                    fontSize: 24.0,
-                  ),
+                      fontFamily: 'Nunito',
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.w800),
                 ),
               ),
             ),
           );
-          // return Container(
-          //     margin: const EdgeInsets.fromLTRB(15.0, 30.0, 15.0, 5),
-          //     decoration: BoxDecoration(
-          //       borderRadius: BorderRadius.circular(20),
-          //       color: const Color.fromRGBO(229, 229, 229, 0.5),
-          //     ),
-          //     height: 160,
-          //     child: const Center(
-          //         child: Text('Сонгох шалгалт',
-          //             maxLines: 2,
-          //             textAlign: TextAlign.center,
-          //             style: TextStyle(
-          //               fontFamily: 'Nunito',
-          //               fontSize: 24.0,
-          //             ))));
         });
   }
 }

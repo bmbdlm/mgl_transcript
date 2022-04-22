@@ -113,7 +113,8 @@ class _MainScreenState extends State<MainScreen> {
                                 style: const TextStyle(
                                     color: const Color(0xffEF7400),
                                     fontFamily: 'Nunito',
-                                    fontSize: 18.0)),
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w800)),
                           ],
                         ),
                         Row(
@@ -131,7 +132,7 @@ class _MainScreenState extends State<MainScreen> {
                                 style: TextStyle(
                                     color: Color(0xFFEF476F),
                                     fontFamily: 'Nunito',
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w800,
                                     fontSize: 18.0)),
                           ],
                         ),
@@ -149,10 +150,11 @@ class _MainScreenState extends State<MainScreen> {
                             Text(
                               '${snapshot.data?.exp}',
                               style: const TextStyle(
-                                  color: Color(0xFFFFB51A),
-                                  fontFamily: 'Nunito',
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18.0),
+                                color: Color(0xFFFFB51A),
+                                fontFamily: 'Nunito',
+                                fontWeight: FontWeight.w800,
+                                fontSize: 18.0,
+                              ),
                             ),
                           ],
                         ),

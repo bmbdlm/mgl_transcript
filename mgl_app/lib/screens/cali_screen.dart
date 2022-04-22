@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
 
@@ -17,9 +17,9 @@ class CaliScreen extends StatelessWidget {
             'Үсгүүдийн үндсэн зурлагууд',
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontFamily: 'Nunito',
-              fontSize: 21.0,
-            ),
+                fontFamily: 'Nunito',
+                fontSize: 21.0,
+                fontWeight: FontWeight.w800),
           ),
         ),
         Row(
@@ -30,30 +30,33 @@ class CaliScreen extends StatelessWidget {
               'Үе/үсэг',
               textAlign: TextAlign.left,
               style: TextStyle(
-                fontFamily: 'Nunito',
-                fontSize: 16.0,
-              ),
+                  fontFamily: 'Nunito',
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.w800),
             ),
             const Text(
               'Эхэн',
               style: TextStyle(
-                fontFamily: 'Nunito',
-                fontSize: 16.0,
-              ),
+                  fontFamily: 'Nunito',
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.w800,
+                  color: Color.fromARGB(94, 94, 94, 94)),
             ),
             const Text(
               'Дунд',
               style: TextStyle(
-                fontFamily: 'Nunito',
-                fontSize: 16.0,
-              ),
+                  fontFamily: 'Nunito',
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.w800,
+                  color: Color.fromARGB(94, 94, 94, 94)),
             ),
             const Text(
               'Адаг',
               style: TextStyle(
-                fontFamily: 'Nunito',
-                fontSize: 16.0,
-              ),
+                  fontFamily: 'Nunito',
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.w800,
+                  color: Color.fromARGB(94, 94, 94, 94)),
             ),
           ],
         ),
@@ -64,145 +67,102 @@ class CaliScreen extends StatelessWidget {
                 height: 67,
                 width: 67,
                 margin: const EdgeInsets.all(8.0),
-                // decoration: BoxDecoration(
-                //     borderRadius: BorderRadius.circular(20),
-                //     color: const Color.fromRGBO(229, 229, 229, 0.5)),
                 child: const Center(
                   child: Text(
                     'А үсэг',
                     style: TextStyle(
                       fontSize: 16.0,
                       fontFamily: 'Nunito',
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w800,
                     ),
                   ),
                 )),
             Container(
-                height: 67,
-                width: 67,
-                margin: const EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: const Color.fromRGBO(229, 229, 229, 0.5)),
-                child: const Center(
-                  child: Text(
-                    'а',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontFamily: 'Nunito',
-                      fontWeight: FontWeight.bold,
-                    ),
+              height: 67,
+              width: 67,
+              alignment: Alignment.bottomCenter,
+              margin: const EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black),
+                  borderRadius: BorderRadius.circular(10)),
+              child: Column(children: [
+                const SizedBox(
+                  height: 27,
+                ),
+                const Divider(
+                  thickness: 1,
+                  indent: 10,
+                  endIndent: 10,
+                  color: Colors.black,
+                ),
+                Text(
+                  'а',
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    fontFamily: 'Nunito',
+                    fontWeight: FontWeight.w800,
                   ),
-                )),
+                ),
+              ]),
+            ),
             Container(
-                height: 67,
-                width: 67,
-                margin: const EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: const Color.fromRGBO(229, 229, 229, 0.5)),
-                child: const Center(
-                  child: Text(
-                    'а',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontFamily: 'Nunito',
-                      fontWeight: FontWeight.bold,
-                    ),
+              height: 67,
+              width: 67,
+              alignment: Alignment.bottomCenter,
+              margin: const EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black),
+                  borderRadius: BorderRadius.circular(10)),
+              child: Column(children: [
+                const SizedBox(
+                  height: 27,
+                ),
+                const Divider(
+                  thickness: 1,
+                  indent: 10,
+                  endIndent: 10,
+                  color: Colors.black,
+                ),
+                Text(
+                  'а',
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    fontFamily: 'Nunito',
+                    fontWeight: FontWeight.w800,
                   ),
-                )),
+                ),
+              ]),
+            ),
             Container(
-                height: 67,
-                width: 67,
-                margin: const EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: const Color.fromRGBO(229, 229, 229, 0.5)),
-                child: const Center(
-                  child: Text(
-                    'а',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontFamily: 'Nunito',
-                      fontWeight: FontWeight.bold,
-                    ),
+              height: 67,
+              width: 67,
+              alignment: Alignment.bottomCenter,
+              margin: const EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black),
+                  borderRadius: BorderRadius.circular(10)),
+              child: Column(children: [
+                const SizedBox(
+                  height: 27,
+                ),
+                const Divider(
+                  thickness: 1,
+                  indent: 10,
+                  endIndent: 10,
+                  color: Colors.black,
+                ),
+                Text(
+                  'а',
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    fontFamily: 'Nunito',
+                    fontWeight: FontWeight.w800,
                   ),
-                )),
+                ),
+              ]),
+            ),
           ],
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Container(
-                height: 67,
-                width: 67,
-                margin: const EdgeInsets.all(8.0),
-                // decoration: BoxDecoration(
-                //     borderRadius: BorderRadius.circular(20),
-                //     color: const Color.fromRGBO(229, 229, 229, 0.5)),
-                child: const Center(
-                  child: Text(
-                    'Э үсэг',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontFamily: 'Nunito',
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                )),
-            Container(
-                height: 67,
-                width: 67,
-                margin: const EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: const Color.fromRGBO(229, 229, 229, 0.5)),
-                child: const Center(
-                  child: Text(
-                    'э',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontFamily: 'Nunito',
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                )),
-            Container(
-                height: 67,
-                width: 67,
-                margin: const EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: const Color.fromRGBO(229, 229, 229, 0.5)),
-                child: const Center(
-                  child: Text(
-                    'э',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontFamily: 'Nunito',
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                )),
-            Container(
-                height: 67,
-                width: 67,
-                margin: const EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: const Color.fromRGBO(229, 229, 229, 0.5)),
-                child: const Center(
-                  child: Text(
-                    'э',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontFamily: 'Nunito',
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                )),
-          ],
-        )
         // GridView.builder(
         //     itemCount: 16,
         //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

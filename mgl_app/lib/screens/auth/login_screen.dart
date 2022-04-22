@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_svg/svg.dart';
@@ -75,54 +76,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      onPressed: () {
-                        globals.auth.signOut();
-                        globals.auth.signInWithEmailAndPassword(
+                      onPressed: () async {
+                        await FirebaseAuth.instance.signInWithEmailAndPassword(
                             email: _email, password: _password);
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (context) => MainScreen()));
-                        // log("end irsse");
-                        // log(globals.auth.currentUser!.uid.toString());
                       }),
-                  // GestureDetector(
-                  //   onTap: () {
-                  //     auth.signInWithEmailAndPassword(
-                  //         email: _email, password: _password);
-                  //     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  //         builder: (context) => MainScreen()));
-                  //     // Navigator.push(
-                  //     //   context,
-                  //     //   MaterialPageRoute(
-                  //     //     builder: (context) => const MainScreen(),
-                  //     //   ),
-                  //     // );
-                  //   },
-                  //   child: PhysicalModel(
-                  //     elevation: 24.0,
-                  //     clipBehavior: Clip.hardEdge,
-                  //     borderRadius: BorderRadius.circular(25),
-                  //     color: kPrimaryColor,
-                  //     child: Container(
-                  //       decoration: BoxDecoration(
-                  //         borderRadius: BorderRadius.circular(kDesktopPadding),
-                  //         color: kPrimaryColor,
-                  //       ),
-                  //       height: 55.0,
-                  //       width: 210,
-                  //       child: const Center(
-                  //         child: Text(
-                  //           'Нэвтрэх',
-                  //           style: TextStyle(
-                  //             fontFamily: 'Nunito',
-                  //             fontSize: 24,
-                  //             color: Colors.white,
-                  //             fontWeight: FontWeight.bold,
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                 ],
               ),
             ),
