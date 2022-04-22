@@ -19,8 +19,24 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  String formatTime(int seconds) {
+    return '${(Duration(seconds: seconds))}'.split('.')[0].padLeft(8, '0');
+  }
+
+  String calculateRank(int exp) {
+    String tmp;
+    if (exp < 20000) {
+      tmp = 'assets/svgs/ondog 1.svg';
+    } else if (exp < 40000) {
+      tmp = 'assets/svgs/degdeehe 1.svg';
+    } else {
+      tmp = 'assets/svgs/tahia 1.svg';
+    }
+    return tmp;
+  }
+
   Widget build(BuildContext context) {
-    bool isSwitched = false;
+    bool isSwitched = true;
     late String _email, _password;
 
     return Scaffold(
@@ -58,20 +74,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             )
                           ],
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(right: 16.0),
+                        SizedBox(
                           height: 80,
                           width: 80,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.pink,
+                          child: SvgPicture.asset(
+                            'assets/svgs/circle-user-solid 1.svg',
                           ),
                         )
                       ],
                     ),
                   ),
                   const Divider(
-                    height: 20,
                     thickness: 2,
                     indent: 0,
                     endIndent: 0,
@@ -101,16 +114,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       childAspectRatio: 11 / 6,
                       children: [
                         StatisticWidget(
-                          text: 'Нийт суралцсан цаг',
+                          text:
+                              'Нийт суралцсан цаг : ${formatTime(snapshot.data!.learnedTime)}',
                           svgPath: 'assets/svgs/clock-solid 1.svg',
                         ),
                         StatisticWidget(
-                          text: 'Нийт цуглуулсан оноо',
+                          text: 'Нийт цуглуулсан оноо: ${snapshot.data!.exp}',
                           svgPath: 'assets/svgs/Vector_coin.svg',
                         ),
                         StatisticWidget(
-                          text: 'Одоогийн түвшин',
-                          svgPath: 'assets/svgs/ranking-star-solid 1.svg',
+                          text: 'Одоогийн түвшин:',
+                          svgPath: calculateRank(snapshot.data!.exp),
                         ),
                         StatisticWidget(
                           text: 'Нийт хичээлийн процесс',
@@ -159,12 +173,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   fontWeight: FontWeight.w800),
                               textAlign: TextAlign.left,
                             ),
-                            // Switch(
-                            //     value: isSwitched,
-                            //     activeColor: Colors.green,
-                            //     onChanged: (value) {
-                            //       isSwitched = value;
-                            //     })
+                            SizedBox(
+                              width: 105,
+                            ),
+                            SizedBox(
+                              height: 20,
+                              child: Switch(
+                                  value: isSwitched,
+                                  activeColor: Colors.green,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      isSwitched = value;
+                                    });
+                                  }),
+                            )
                           ],
                         ),
                         Divider(
@@ -303,7 +325,7 @@ class StatisticWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 15.0),
-          SvgPicture.asset(svgPath),
+          SizedBox(height: 35, width: 35, child: SvgPicture.asset(svgPath)),
         ],
       ),
     );

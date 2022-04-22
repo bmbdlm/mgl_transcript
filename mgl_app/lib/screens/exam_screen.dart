@@ -14,7 +14,7 @@ class ExamScreen extends StatelessWidget {
         itemCount: 4,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          childAspectRatio: 0.64,
+          childAspectRatio: 0.71,
           mainAxisSpacing: 0.0,
           crossAxisSpacing: 0.0,
         ),
