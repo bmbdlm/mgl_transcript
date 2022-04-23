@@ -58,7 +58,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 TextField(
                   decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.email),
-                      hintText: 'Herelegchiin ner'),
+                      hintText: 'Хэрэглэгчийн нэр'),
                   onChanged: (value) {
                     setState(() {
                       _username = value.trim();
@@ -86,7 +86,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 ElevatedButton(
                     child: const Text(
-                      'Burtguuleh',
+                      'Бүртгүүлэх',
                       style: TextStyle(
                         fontFamily: 'Nunito',
                         fontSize: 24,

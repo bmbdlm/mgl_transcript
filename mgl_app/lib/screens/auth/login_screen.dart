@@ -68,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   ElevatedButton(
                       child: const Text(
-                        'Newtreh',
+                        'НЭВТРЭХ',
                         style: TextStyle(
                           fontFamily: 'Nunito',
                           fontSize: 24,

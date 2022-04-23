@@ -3,17 +3,20 @@
 import 'dart:developer';
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mgl_app/data/globals.dart' as globals;
 import 'package:mgl_app/screens/auth/login_screen.dart';
+import 'package:mgl_app/screens/cali_screen.dart';
+import 'package:mgl_app/screens/change_info.dart';
 
 import '../data/database.dart';
 import '../data/user.dart';
 
 class ProfileScreen extends StatefulWidget {
-  ProfileScreen({Key? key}) : super(key: key);
+  const ProfileScreen({Key? key}) : super(key: key);
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
@@ -35,8 +38,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return tmp;
   }
 
+  bool isSwitched = false;
+
   Widget build(BuildContext context) {
-    bool isSwitched = true;
     late String _email, _password;
 
     return Scaffold(
@@ -65,7 +69,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                             ),
                             Text(
-                              '${globals.auth.currentUser!.email}',
+                              '${globals.auth.currentUser?.email ?? ''} ',
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 fontFamily: 'Nunito',
@@ -115,16 +119,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       children: [
                         StatisticWidget(
                           text:
-                              'Нийт суралцсан цаг : ${formatTime(snapshot.data!.learnedTime)}',
+                              'Нийт суралцсан цаг : ${formatTime(snapshot.data?.learnedTime ?? 0)}',
                           svgPath: 'assets/svgs/clock-solid 1.svg',
                         ),
                         StatisticWidget(
-                          text: 'Нийт цуглуулсан оноо: ${snapshot.data!.exp}',
+                          text:
+                              'Нийт цуглуулсан оноо: ${snapshot.data?.exp ?? 0}',
                           svgPath: 'assets/svgs/Vector_coin.svg',
                         ),
                         StatisticWidget(
                           text: 'Одоогийн түвшин:',
-                          svgPath: calculateRank(snapshot.data!.exp),
+                          svgPath: calculateRank(snapshot.data?.exp ?? 0),
                         ),
                         StatisticWidget(
                           text: 'Нийт хичээлийн процесс',
@@ -180,43 +185,60 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               height: 20,
                               child: Switch(
                                   value: isSwitched,
+                                  //value: snapshot.data?.notification ?? false,
                                   activeColor: Colors.green,
                                   onChanged: (value) {
                                     setState(() {
                                       isSwitched = value;
+                                      print(isSwitched);
+                                      FirebaseFirestore.instance
+                                          .collection('users')
+                                          .doc(globals.auth.currentUser!.uid)
+                                          .update({
+                                        'notification': isSwitched
+                                      }).then((_) => print(
+                                              'success')); //snapshot.data!.notification = value;
                                     });
                                   }),
                             )
                           ],
                         ),
-                        Divider(
-                          thickness: 2,
-                          indent: 0,
-                          endIndent: 0,
-                          color: Color.fromARGB(196, 196, 196, 196),
-                        ),
-                        Row(
-                          children: [
-                            SizedBox(
-                              height: 20.0,
-                              width: 20.0,
-                              child: SvgPicture.asset(
-                                'assets/svgs/fire-solid 2.svg',
-                              ),
-                            ),
-                            SizedBox(
-                              width: 15,
-                            ),
-                            Text(
-                              'Мэдээлэл өөрчлөх',
-                              style: TextStyle(
-                                  fontSize: 14.0,
-                                  fontFamily: 'Nunito',
-                                  fontWeight: FontWeight.w800),
-                              textAlign: TextAlign.left,
-                            ),
-                          ],
-                        ),
+                        // Divider(
+                        //   thickness: 2,
+                        //   indent: 0,
+                        //   endIndent: 0,
+                        //   color: Color.fromARGB(196, 196, 196, 196),
+                        // ),
+                        // GestureDetector(
+                        //   onTap: () => {
+                        //     Navigator.of(context).pushReplacement(
+                        //         MaterialPageRoute(
+                        //             builder: (context) => ChangeInfo())),
+                        //     globals.user = snapshot.data?.name ?? '',
+                        //   },
+                        //   child: Row(
+                        //     children: [
+                        //       SizedBox(
+                        //         height: 20.0,
+                        //         width: 20.0,
+                        //         child: SvgPicture.asset(
+                        //           'assets/svgs/fire-solid 2.svg',
+                        //         ),
+                        //       ),
+                        //       SizedBox(
+                        //         width: 15,
+                        //       ),
+                        //       Text(
+                        //         'Мэдээлэл өөрчлөх',
+                        //         style: TextStyle(
+                        //             fontSize: 14.0,
+                        //             fontFamily: 'Nunito',
+                        //             fontWeight: FontWeight.w800),
+                        //         textAlign: TextAlign.left,
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
                         Divider(
                           thickness: 2,
                           indent: 0,
@@ -256,21 +278,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ],
                     ),
                   ),
-                  // ElevatedButton(
-                  //     child: Text(
-                  //       'Garah',
-                  //       style: TextStyle(
-                  //         fontFamily: 'Nunito',
-                  //         fontSize: 24,
-                  //         color: Colors.white,
-                  //         fontWeight: FontWeight.bold,
-                  //       ),
-                  //     ),
-                  //     onPressed: () {
-                  //       globals.auth.signOut();
-                  //       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  //           builder: (context) => LoginScreen()));
-                  //     }),
                 ],
               );
             }),

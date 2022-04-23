@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mgl_app/constants.dart';
+import 'package:mgl_app/screens/change_info.dart';
 import 'package:mgl_app/screens/profile_screen.dart';
 import 'package:mgl_app/data/globals.dart' as globals;
 import 'package:mgl_app/data/database.dart';
@@ -30,6 +31,7 @@ class _MainScreenState extends State<MainScreen> {
     ExamScreen(),
     ProfileScreen(),
     ExamScreen(),
+    ChangeInfo(),
   ];
   List<BottomNavigationBarItem> _bnItem(currentIndex) => [
         BottomNavigationBarItem(

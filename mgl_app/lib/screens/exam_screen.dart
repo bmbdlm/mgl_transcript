@@ -10,6 +10,12 @@ class ExamScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> _types = [
+      'Сонгох шалгалт',
+      'Нөхөх  шалгалт',
+      'Зурагтай шалгалт',
+      'Холимог шалгалт',
+    ];
     return GridView.builder(
         itemCount: 4,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -21,12 +27,12 @@ class ExamScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ExamsScreen(),
-                ),
-              );
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => ExamsScreen(),
+              //   ),
+              // );
             },
             child: Container(
               margin: const EdgeInsets.fromLTRB(15.0, 30.0, 15.0, 5),
@@ -35,9 +41,9 @@ class ExamScreen extends StatelessWidget {
                 color: const Color.fromRGBO(229, 229, 229, 0.5),
               ),
               height: 160,
-              child: const Center(
+              child: Center(
                 child: Text(
-                  'Сонгох шалгалт',
+                  '${_types[index]}',
                   maxLines: 2,
                   textAlign: TextAlign.center,
                   style: TextStyle(
