@@ -1,81 +1,169 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:mgl_app/data/database.dart';
+import 'package:mgl_app/data/globals.dart' as globals;
+import 'package:mgl_app/screens/quiz.dart';
+import 'package:mgl_app/screens/test.dart';
 
 class ExamsScreen extends StatelessWidget {
-  const ExamsScreen({Key? key}) : super(key: key);
+  ExamsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final Stream<QuerySnapshot> exams = FirebaseFirestore.instance
+        .collection('exam')
+        .where("examType", isEqualTo: globals.type)
+        .snapshots();
     return Scaffold(
       body: Container(
-          padding: const EdgeInsets.fromLTRB(50, 100, 20, 30),
-          child: Column(
-            children: [
-              const Text(
-                '1. Дараах хариултуудаас зөв хариултыг олно уу?',
-                style: TextStyle(fontFamily: 'Nunito', fontSize: 20.0),
-              ),
-              Container(
-                decoration: const BoxDecoration(),
-                child: const Text('Хариулт 1'),
-              ),
-            ],
-          )),
+        padding: const EdgeInsets.fromLTRB(30, 117, 30, 0),
+        child: StreamBuilder<QuerySnapshot>(
+          stream: exams,
+          builder:
+              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.hasError) {
+              return const Text('Something went wrong');
+            }
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Text('Loading');
+            }
+            final data = snapshot.requireData;
+
+            return ListView.builder(
+              itemCount: data.size,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: (() {
+                    showAlertDialog(context, data.docs[index].id,
+                        data.docs[index]['requiredExp']);
+                  }),
+                  child: Container(
+                    padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
+                    margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(color: Colors.black),
+
+                      //color: Colors.black,
+                    ),
+                    height: 94,
+                    child: Row(children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Шалгалт № ${data.docs[index]['number']}",
+                            style: TextStyle(
+                              fontFamily: 'Nunito',
+                              fontSize: 23.0,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                          Text(
+                            '${data.docs[index]['requiredExp']} exp',
+                            style: TextStyle(
+                                fontFamily: 'Nunito',
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.w800,
+                                color: Color.fromARGB(94, 94, 94, 94)),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        width: 80,
+                        height: 10,
+                      ),
+                      Container(
+                        width: 90,
+                        height: 62,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: SizedBox(
+                          width: 10,
+                          height: 10,
+                          child: SvgPicture.asset(
+                            'assets/svgs/arrow-right-solid 1.svg',
+                          ),
+                        ),
+                      )
+                    ]),
+                  ),
+                );
+              },
+            );
+          },
+        ),
+      ),
     );
-    // return Scaffold(
-    //   body: Column(
-    //     crossAxisAlignment: CrossAxisAlignment.center,
-    //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-    //     children: [
-    //       Container(
-    //         height: 50,
-    //         width: 300,
-    //         child: Text(
-    //           '1. Дараах хариултуудаас зөв хариултыг олно уу?',
-    //           style: TextStyle(fontFamily: 'Nunito', fontSize: 20.0),
-    //         ),
-    //       ),
-    // Container(
-    //   child: Column(
-    //     crossAxisAlignment: CrossAxisAlignment.center,
-    //     children: [
-    //       Container(
-    //         height: 52.0,
-    //         width: 261,
-    //         decoration: BoxDecoration(
-    //             borderRadius: BorderRadius.circular(15.0),
-    //             border: Border.all(color: Colors.black)),
-    //         child: Text(
-    //           'Хариулт 1',
-    //           textAlign: TextAlign.center,
-    //           style: TextStyle(
-    //             fontFamily: 'Nunito',
-    //             fontSize: 23.0,
-    //           ),
-    //         ),
-    //       )
-    //     ],
-    //   ),
-    // ),
-    // SizedBox(
-    //   child: Column(
-    //     children: [
-    //       Container(
-    //         height: 52.0,
-    //         width: 261,
-    //         decoration: BoxDecoration(
-    //             borderRadius: BorderRadius.circular(15.0),
-    //             border: Border.all(color: Colors.black)),
-    //         child: Text(
-    //           'Хариулт 4',
-    //           textAlign: TextAlign.center,
-    //           style: TextStyle(
-    //             fontFamily: 'Nunito',
-    //             fontSize: 23.0,
-    //           ),
-    //         ),
-    //       )
-    //     ],
-    //   ),
-    // )
   }
+}
+
+showAlertDialog(BuildContext context, String examId, int exp) {
+  Widget cancelButton = TextButton(
+    child: Text("Болих"),
+    onPressed: () {
+      Navigator.of(context).pop();
+    },
+  );
+  Widget okButton = TextButton(
+    child: Text("Тийм"),
+    onPressed: () async {
+      await DatabaseService().getQuestions(examId);
+      Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (context) => QuizTest()));
+    },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("Мэдлэг сорих шалгалт"),
+    content: Text(
+        'Та ${exp} exp оноотой дүйх уг шалгалтыг эхлүүлэхдээ итгэлтэй байна уу?'),
+    actions: [
+      cancelButton,
+      okButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
+
+ShowWarningDialog(BuildContext context, int exp, int health) {
+  Widget cancelButton = TextButton(
+    child: Text("Болих"),
+    onPressed: () {
+      Navigator.pop(context);
+    },
+  );
+  Widget okButton = TextButton(
+    child: Text("Тийм"),
+    onPressed: () {},
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("Мэдлэг сорих шалгалт"),
+    content: Text(''),
+    actions: [
+      cancelButton,
+      okButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

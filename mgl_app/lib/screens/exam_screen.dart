@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import 'exams.dart';
+import 'package:mgl_app/data/globals.dart' as globals;
 import 'video_player.dart';
 
 class ExamScreen extends StatelessWidget {
@@ -11,10 +12,10 @@ class ExamScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<String> _types = [
-      'Сонгох шалгалт',
-      'Нөхөх  шалгалт',
-      'Зурагтай шалгалт',
-      'Холимог шалгалт',
+      'Сонгох',
+      'Нөхөх',
+      'Зурагтай',
+      'Холимог',
     ];
     return GridView.builder(
         itemCount: 4,
@@ -27,12 +28,13 @@ class ExamScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => ExamsScreen(),
-              //   ),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ExamsScreen(),
+                ),
+              );
+              globals.type = _types[index];
             },
             child: Container(
               margin: const EdgeInsets.fromLTRB(15.0, 30.0, 15.0, 5),
@@ -43,7 +45,7 @@ class ExamScreen extends StatelessWidget {
               height: 160,
               child: Center(
                 child: Text(
-                  '${_types[index]}',
+                  '${_types[index]}  шалгалт',
                   maxLines: 2,
                   textAlign: TextAlign.center,
                   style: TextStyle(

@@ -184,13 +184,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             SizedBox(
                               height: 20,
                               child: Switch(
-                                  value: isSwitched,
-                                  //value: snapshot.data?.notification ?? false,
+                                  //value: isSwitched,
+                                  value: snapshot.data?.notification ?? false,
                                   activeColor: Colors.green,
                                   onChanged: (value) {
                                     setState(() {
                                       isSwitched = value;
-                                      print(isSwitched);
                                       FirebaseFirestore.instance
                                           .collection('users')
                                           .doc(globals.auth.currentUser!.uid)
