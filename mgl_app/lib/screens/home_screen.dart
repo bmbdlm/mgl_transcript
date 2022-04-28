@@ -4,16 +4,20 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mgl_app/screens/video_player.dart';
+import 'package:mgl_app/data/globals.dart' as globals;
 
 //import 'package:mgl_app/constants.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
-  final Stream<QuerySnapshot> lessons =
-      FirebaseFirestore.instance.collection('Lesson').snapshots();
+  final Stream<QuerySnapshot> lessons = FirebaseFirestore.instance
+      .collection('Lesson')
+      .orderBy('number', descending: false)
+      .snapshots();
 
   @override
   Widget build(BuildContext context) {
+    bool isSorting = true;
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: StreamBuilder<QuerySnapshot>(
@@ -26,6 +30,8 @@ class HomeScreen extends StatelessWidget {
             return const Text('Loading');
           }
           final data = snapshot.requireData;
+          // final rawData = snapshot.requireData;
+          // final data = isSorting ? rawData.docs.reversed.toList : rawData.docs;
 
           //Irsen secondoo minut ruu hurwvvleh
           String formatedTime(int secTime) {
@@ -46,15 +52,21 @@ class HomeScreen extends StatelessWidget {
 
           return ListView.builder(
             itemCount: data.size,
+            reverse: false,
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: (() {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => YoutubeVideo(),
-                    ),
-                  );
+                  if (data.docs[index]['started']) {
+                    globals.video_key = data.docs[index]['content'];
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => YoutubeVideo(),
+                      ),
+                    );
+                  } else {
+                    showAlertDialog(context);
+                  }
                 }),
                 child: Container(
                   decoration: BoxDecoration(
@@ -73,23 +85,28 @@ class HomeScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 8.0),
                       Container(
-                        height: 45,
-                        width: 45,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                        ),
-                        child: SvgPicture.asset(
-                          'assets/svgs/circle-play-solid 8.svg',
-                        ),
-                      ),
+                          height: 45,
+                          width: 45,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          // child: SvgPicture.asset(
+                          //   'assets/svgs/circle-play-solid 8.svg',
+                          // ),
+                          child: (data.docs[index]['started'])
+                              ? SvgPicture.asset(
+                                  'assets/svgs/circle-play-solid 8.svg')
+                              : SvgPicture.asset(
+                                  'assets/svgs/circle-play-solid 2.svg')),
                       const SizedBox(width: 8.0),
                       Expanded(
                         child: Row(
                           children: [
-                            Flexible(
+                            Container(
+                              width: 205,
                               child: Text(
                                 '${data.docs[index]['name']}',
-                                maxLines: 2,
+                                maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
                                   fontFamily: 'Nunito',
@@ -122,4 +139,28 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+showAlertDialog(BuildContext context) {
+  Widget okButton = TextButton(
+    child: Text("Ойлголоо"),
+    onPressed: () {
+      Navigator.of(context).pop();
+    },
+  );
+
+  AlertDialog alert = AlertDialog(
+    title: Text('Уг хичээлийг үзэх боломжгүй'),
+    content: Text(
+        'Та өмнөх хичээлээ амжилттай судалж дуусгаснаар уг хичээлийг үзэх боломжтой.'),
+    actions: [
+      okButton,
+    ],
+  );
+
+  showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      });
 }

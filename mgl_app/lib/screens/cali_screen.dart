@@ -3,6 +3,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:mgl_app/screens/zurlaga.dart';
+import 'package:mgl_app/data/globals.dart' as globals;
 
 class CaliScreen extends StatelessWidget {
   CaliScreen({Key? key}) : super(key: key);
@@ -37,6 +39,7 @@ class CaliScreen extends StatelessWidget {
                           child: Center(
                             child: Text(
                               '${data.docs[index]['text']}',
+                              //'${data.docs[index].id}',
                               style: TextStyle(
                                 fontSize: 16.0,
                                 fontFamily: 'Nunito',
@@ -44,90 +47,138 @@ class CaliScreen extends StatelessWidget {
                               ),
                             ),
                           )),
-                      Container(
-                        height: 67,
-                        width: 67,
-                        alignment: Alignment.bottomCenter,
-                        margin: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black),
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Column(children: [
-                          const SizedBox(
-                            height: 27,
-                          ),
-                          const Divider(
-                            thickness: 1,
-                            indent: 10,
-                            endIndent: 10,
-                            color: Colors.black,
-                          ),
-                          Text(
-                            'а',
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              fontFamily: 'Nunito',
-                              fontWeight: FontWeight.w800,
+                      GestureDetector(
+                        onTap: () {
+                          globals.cali_type = 'эхэнд';
+                          globals.cali_key = data.docs[index]['initial'];
+                          globals.cali_spe = data.docs[index]['specific'];
+                          // print(
+                          //     'Үгийн ${globals.cali_type} ордог ${globals.cali_spe} үсэг');
+                          // print(globals.cali_key);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Zurlaga(),
                             ),
-                          ),
-                        ]),
-                      ),
-                      Container(
-                        height: 67,
-                        width: 67,
-                        alignment: Alignment.bottomCenter,
-                        margin: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black),
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Column(children: [
-                          const SizedBox(
-                            height: 27,
-                          ),
-                          const Divider(
-                            thickness: 1,
-                            indent: 10,
-                            endIndent: 10,
-                            color: Colors.black,
-                          ),
-                          Text(
-                            'а',
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              fontFamily: 'Nunito',
-                              fontWeight: FontWeight.w800,
+                          );
+                        },
+                        child: Container(
+                          height: 67,
+                          width: 67,
+                          alignment: Alignment.bottomCenter,
+                          margin: const EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Column(children: [
+                            const SizedBox(
+                              height: 27,
                             ),
-                          ),
-                        ]),
-                      ),
-                      Container(
-                        height: 67,
-                        width: 67,
-                        alignment: Alignment.bottomCenter,
-                        margin: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black),
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Column(children: [
-                          const SizedBox(
-                            height: 27,
-                          ),
-                          const Divider(
-                            thickness: 1,
-                            indent: 10,
-                            endIndent: 10,
-                            color: Colors.black,
-                          ),
-                          Text(
-                            'а',
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              fontFamily: 'Nunito',
-                              fontWeight: FontWeight.w800,
+                            const Divider(
+                              thickness: 1,
+                              indent: 10,
+                              endIndent: 10,
+                              color: Colors.black,
                             ),
-                          ),
-                        ]),
+                            Text(
+                              '${data.docs[index]['specific']}',
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                fontFamily: 'Nunito',
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                          ]),
+                        ),
                       ),
+                      GestureDetector(
+                        onTap: (() {
+                          globals.cali_type = 'дунд';
+                          globals.cali_key = data.docs[index]['following'];
+                          globals.cali_spe = data.docs[index]['specific'];
+                          // print(
+                          //     'Үгийн ${globals.cali_type} ордог ${globals.cali_spe} үсэг');
+                          // print(globals.cali_key);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Zurlaga(),
+                            ),
+                          );
+                        }),
+                        child: Container(
+                          height: 67,
+                          width: 67,
+                          alignment: Alignment.bottomCenter,
+                          margin: const EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Column(children: [
+                            const SizedBox(
+                              height: 27,
+                            ),
+                            const Divider(
+                              thickness: 1,
+                              indent: 10,
+                              endIndent: 10,
+                              color: Colors.black,
+                            ),
+                            Text(
+                              '${data.docs[index]['specific']}',
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                fontFamily: 'Nunito',
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                          ]),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: (() {
+                          globals.cali_type = 'адагт';
+                          globals.cali_key = data.docs[index]['final'];
+                          globals.cali_spe = data.docs[index]['specific'];
+                          // print(
+                          //     'Үгийн ${globals.cali_type} ордог ${globals.cali_spe} үсэг');
+                          // print(globals.cali_key);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Zurlaga(),
+                            ),
+                          );
+                        }),
+                        child: Container(
+                          height: 67,
+                          width: 67,
+                          alignment: Alignment.bottomCenter,
+                          margin: const EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Column(children: [
+                            const SizedBox(
+                              height: 27,
+                            ),
+                            const Divider(
+                              thickness: 1,
+                              indent: 10,
+                              endIndent: 10,
+                              color: Colors.black,
+                            ),
+                            Text(
+                              '${data.docs[index]['specific']}',
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                fontFamily: 'Nunito',
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                          ]),
+                        ),
+                      )
                     ]),
               );
             },

@@ -1,10 +1,11 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mgl_app/data/database.dart';
 import 'package:mgl_app/data/globals.dart' as globals;
 import 'package:mgl_app/screens/quiz.dart';
-import 'package:mgl_app/screens/test.dart';
 
 class ExamsScreen extends StatelessWidget {
   ExamsScreen({Key? key}) : super(key: key);

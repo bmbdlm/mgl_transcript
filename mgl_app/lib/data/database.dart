@@ -57,9 +57,7 @@ class DatabaseService {
             .collection('question')
             .where('examID', isEqualTo: examid)
             .get();
-
-    print('shalgaltiin id: ' + examid);
-    print('asuultiin too:' + querySnapshot.docs.length.toString());
+    ;
     for (var doc in querySnapshot.docs) {
       if (doc['first'] != null &&
           doc['correctAnswer'] != null &&
@@ -70,65 +68,32 @@ class DatabaseService {
         Map<String, bool>? answer = {};
         if (doc['first'] == doc['correctAnswer']) {
           answer['${doc['first']}'] = true;
-          //print('end boloh estoi');
-          //print(answer[doc['first']]);
           answer['${doc['second']}'] = false;
-          //print(answer[doc['second']]);
           answer['${doc['third']}'] = false;
-          //print('tusgaarlah zuraas' + answer[doc['third']].toString());
-          //print(answer[doc['third']]);
           answer['${doc['fourth']}'] = false;
-          //print(answer[doc['fourth']]);
-          //print('if ees garaw');
         } else if (doc['second'] == doc['correctAnswer']) {
           answer['${doc['first']}'] = false;
-          //print('end boloh estoi');
-          //print(answer[doc['first']]);
           answer['${doc['second']}'] = true;
-          //print(answer[doc['second']]);
           answer['${doc['third']}'] = false;
-          //print(answer[doc['third']]);
           answer['${doc['fourth']}'] = false;
-          //print(answer[doc['fourth']]);
-          //print('if ees garaw');
         } else if (doc['third'] == doc['correctAnswer']) {
           answer['${doc['first']}'] = false;
-          //print('end boloh estoi');
-          //print(answer[doc['first']]);
           answer['${doc['second']}'] = false;
-          //print(answer[doc['second']]);
           answer['${doc['third']}'] = true;
-          //print(answer[doc['third']]);
           answer['${doc['fourth']}'] = false;
-          //print(answer[doc['fourth']]);
-          //print('if ees garaw');
         } else if (doc['fourth'] == doc['correctAnswer']) {
           answer['${doc['first']}'] = false;
-          //print('end boloh estoi');
-          //print(answer[doc['first']]);
           answer['${doc['second']}'] = false;
-          //print(answer[doc['second']]);
           answer['${doc['third']}'] = false;
-          //print(answer[doc['third']]);
           answer['${doc['fourth']}'] = true;
-          //print(answer[doc['fourth']]);
-          //print('if ees garaw');
         }
-        //print('garsan if end irew');
-        print('|------------|');
-        print(answer[doc['first']]);
-        print(answer[doc['second']]);
-        print(answer[doc['third']]);
-        print(answer[doc['fourth']]);
-        print('}--------------}');
         TestQuestion tmp = TestQuestion(doc['body'], answer, doc['answerDesc']);
+        print(tmp);
         globals.questions.add(tmp);
       } else {
         print('aldaa');
       }
     }
-    print('asuultiin urt');
-    print(globals.questions.length);
   }
 }
 

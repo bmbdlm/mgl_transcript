@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:mgl_app/data/globals.dart' as globals;
 
 class YoutubeVideo extends StatefulWidget {
   const YoutubeVideo({Key? key}) : super(key: key);
@@ -31,7 +32,7 @@ class _YoutubeVideoState extends State<YoutubeVideo> {
   void initState() {
     super.initState();
     _controller = YoutubePlayerController(
-      initialVideoId: _ids.first,
+      initialVideoId: globals.video_key,
       flags: const YoutubePlayerFlags(
         mute: false,
         autoPlay: true,

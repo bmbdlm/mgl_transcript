@@ -3,11 +3,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 //import 'package:flutter_svg/svg.dart';
 import 'package:mgl_app/constants.dart';
 import 'package:mgl_app/screens/auth/register_screen.dart';
 import 'package:mgl_app/screens/main_screen.dart';
 import 'package:mgl_app/data/globals.dart' as globals;
+//import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -103,17 +105,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       Container(
                         height: 50.0,
                         width: 50.0,
-                        color: Colors.red,
+                        child: SvgPicture.asset('assets/svgs/google.svg'),
                       ),
                       Container(
-                        height: 50.0,
-                        width: 50.0,
-                        color: Colors.pink,
-                      ),
-                      Container(
-                        height: 50.0,
-                        width: 50.0,
-                        color: Colors.blue,
+                        height: 48.0,
+                        width: 48.0,
+                        //color: Colors.blue,
+                        child: SvgPicture.asset('assets/svgs/facebook.svg'),
                       ),
                     ],
                   ),

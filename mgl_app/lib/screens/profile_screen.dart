@@ -10,7 +10,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mgl_app/data/globals.dart' as globals;
 import 'package:mgl_app/screens/auth/login_screen.dart';
 import 'package:mgl_app/screens/cali_screen.dart';
-import 'package:mgl_app/screens/change_info.dart';
 
 import '../data/database.dart';
 import '../data/user.dart';

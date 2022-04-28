@@ -10,3 +10,8 @@ var user = '';
 String type = '';
 
 List<TestQuestion> questions = [];
+
+String cali_key = '';
+String cali_type = '';
+String cali_spe = '';
+String video_key = '';
