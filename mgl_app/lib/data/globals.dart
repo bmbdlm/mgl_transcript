@@ -3,6 +3,7 @@ library globals;
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../model/test_question.dart';
+import 'lesson.dart';
 
 var auth = FirebaseAuth.instance;
 var user = '';
@@ -15,3 +16,5 @@ String cali_key = '';
 String cali_type = '';
 String cali_spe = '';
 String video_key = '';
+
+List<MainLesson> lessons = [];

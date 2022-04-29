@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mgl_app/data/globals.dart' as globals;
+import 'package:mgl_app/data/lesson.dart';
 import 'package:mgl_app/data/user.dart';
 import 'package:mgl_app/model/test_question.dart';
 
@@ -17,7 +18,7 @@ class DatabaseService {
           .get();
 
       if (ds.exists) {
-        print(ds.data());
+        //print(ds.data());
         final MyUser userz = MyUser(
             ds.get('daysStreak'),
             ds.get('exp'),
@@ -95,18 +96,24 @@ class DatabaseService {
       }
     }
   }
-}
 
-// users.add({
-//   'uid': uid,
-//   'name': userName,
-//   'daysStreak': 0,
-//   'exp': 0,
-//   'health': 5,
-//   'learnedTime': 0,
-//   'notification': true,
-//   'registrationDate': Timestamp.now(),
-//   'skipped': false,
-//   'skippedDays': 0
-// }
-//);?
+  Future<MainLesson?> getLesson() async {
+    QuerySnapshot sn = await FirebaseFirestore.instance
+        .collection('Lesson')
+        .orderBy('number')
+        .get();
+    print(sn.size);
+    for (int i = 0; i < sn.size; i++) {
+      //print(sn.docs[i]['watchedTime']);
+      MainLesson tmp = new MainLesson(
+          sn.docs[i]['content'],
+          sn.docs[i]['name'],
+          sn.docs[i]['number'],
+          sn.docs[i]['started'],
+          sn.docs[i]['time'],
+          sn.docs[i]['watchedTime'],
+          sn.docs[i]['completed']);
+      globals.lessons.add(tmp);
+    }
+  }
+}

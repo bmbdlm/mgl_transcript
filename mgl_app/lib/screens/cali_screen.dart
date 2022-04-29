@@ -6,10 +6,14 @@ import 'package:flutter/rendering.dart';
 import 'package:mgl_app/screens/zurlaga.dart';
 import 'package:mgl_app/data/globals.dart' as globals;
 
+import '../data/database.dart';
+
 class CaliScreen extends StatelessWidget {
   CaliScreen({Key? key}) : super(key: key);
-  final Stream<QuerySnapshot> calis =
-      FirebaseFirestore.instance.collection('calligraph').snapshots();
+  final Stream<QuerySnapshot> calis = FirebaseFirestore.instance
+      .collection('calligraph')
+      .orderBy('number', descending: false)
+      .snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +31,7 @@ class CaliScreen extends StatelessWidget {
           final data = snapshot.requireData;
           return ListView.builder(
             itemCount: data.size,
+            reverse: false,
             itemBuilder: (context, index) {
               return Container(
                 child: Row(
@@ -52,6 +57,7 @@ class CaliScreen extends StatelessWidget {
                           globals.cali_type = 'эхэнд';
                           globals.cali_key = data.docs[index]['initial'];
                           globals.cali_spe = data.docs[index]['specific'];
+                          DatabaseService().getLesson();
                           // print(
                           //     'Үгийн ${globals.cali_type} ордог ${globals.cali_spe} үсэг');
                           // print(globals.cali_key);

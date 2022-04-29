@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mgl_app/data/database.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:mgl_app/data/globals.dart' as globals;
 
@@ -24,9 +25,9 @@ class _YoutubeVideoState extends State<YoutubeVideo> {
   bool _muted = false;
   bool _isPlayerReady = false;
 
-  final List<String> _ids = [
-    'VlOHUOFEA3c',
-  ];
+  // final List<String> _ids = [
+  //   'VlOHUOFEA3c',
+  // ];
 
   @override
   void initState() {
@@ -75,6 +76,21 @@ class _YoutubeVideoState extends State<YoutubeVideo> {
 
   @override
   Widget build(BuildContext context) {
+    String formatedTime(int secTime) {
+      String getParsedTime(String time) {
+        if (time.length <= 1) return "0$time";
+        return time;
+      }
+
+      int min = secTime ~/ 60;
+      int sec = secTime % 60;
+
+      String parsedTime =
+          getParsedTime(min.toString()) + " : " + getParsedTime(sec.toString());
+
+      return parsedTime;
+    }
+
     return Scaffold(
       body: YoutubePlayerBuilder(
         onExitFullScreen: () {
@@ -113,9 +129,10 @@ class _YoutubeVideoState extends State<YoutubeVideo> {
             _isPlayerReady = true;
           },
           onEnded: (data) {
-            _controller
-                .load(_ids[(_ids.indexOf(data.videoId) + 1) % _ids.length]);
-            _showSnackBar('Next Video Started!');
+            showAlertDialog(context);
+            // _controller
+            //     .load(_ids[(_ids.indexOf(data.videoId) + 1) % _ids.length]);
+            // _showSnackBar('Next Video Started!');
           },
         ),
         builder: (context, player) => Scaffold(
@@ -130,7 +147,7 @@ class _YoutubeVideoState extends State<YoutubeVideo> {
           body: ListView(
             children: [
               player,
-              for (var i = 0; i < 8; i++)
+              for (var i = 0; i < globals.lessons.length; i++)
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
@@ -143,30 +160,35 @@ class _YoutubeVideoState extends State<YoutubeVideo> {
                   child: Row(
                     children: [
                       Text(
-                        (i + 1).toString(),
+                        '${globals.lessons[i].number}',
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(width: 8.0),
                       Container(
-                        height: 45,
-                        width: 45,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                        ),
-                        child: SvgPicture.asset(
-                          'assets/svgs/circle-play-solid 8.svg',
-                        ),
-                      ),
+                          height: 45,
+                          width: 45,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          // child: SvgPicture.asset(
+                          //   'assets/svgs/circle-play-solid 8.svg',
+                          // ),
+                          child: (globals.lessons[i].started)
+                              ? SvgPicture.asset(
+                                  'assets/svgs/circle-play-solid 8.svg')
+                              : SvgPicture.asset(
+                                  'assets/svgs/circle-play-solid 2.svg')),
                       const SizedBox(width: 8.0),
                       Expanded(
                         child: Row(
                           children: [
-                            const Flexible(
+                            Container(
+                              width: 205,
                               child: Text(
-                                'Үсгийн үндсэн зурлага, эгшиг үсэг',
-                                maxLines: 2,
+                                '${globals.lessons[i].name}',
+                                maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontFamily: 'Nunito',
                                   fontSize: 15.0,
                                 ),
@@ -176,10 +198,10 @@ class _YoutubeVideoState extends State<YoutubeVideo> {
                                 margin: const EdgeInsets.only(left: 8.0),
                                 height: 80.0,
                                 width: 40.0,
-                                child: const Center(
-                                    child: const Text(
-                                  '13:04',
-                                  style: TextStyle(
+                                child: Center(
+                                    child: Text(
+                                  '${formatedTime(globals.lessons[i].time)}',
+                                  style: const TextStyle(
                                     fontFamily: 'Nunito',
                                     fontSize: 12.0,
                                   ),
@@ -254,4 +276,27 @@ class _YoutubeVideoState extends State<YoutubeVideo> {
       ),
     );
   }
+}
+
+showAlertDialog(BuildContext context) {
+  Widget okButton = TextButton(
+    child: Text("Ойлголоо"),
+    onPressed: () {
+      Navigator.of(context).pop();
+    },
+  );
+
+  AlertDialog alert = AlertDialog(
+    title: Text('Дасгал ажил'),
+    content: Text('Та энэ хичээлийн дасгал ажлыг хиих үү?'),
+    actions: [
+      okButton,
+    ],
+  );
+
+  showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      });
 }

@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mgl_app/data/database.dart';
 import 'package:mgl_app/screens/video_player.dart';
 import 'package:mgl_app/data/globals.dart' as globals;
 
@@ -17,7 +18,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isSorting = true;
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: StreamBuilder<QuerySnapshot>(
@@ -64,6 +64,8 @@ class HomeScreen extends StatelessWidget {
                         builder: (context) => YoutubeVideo(),
                       ),
                     );
+                    DatabaseService().getLesson();
+                    //print(globals.lessons.length);
                   } else {
                     showAlertDialog(context);
                   }
