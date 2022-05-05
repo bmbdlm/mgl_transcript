@@ -116,4 +116,13 @@ class DatabaseService {
       globals.lessons.add(tmp);
     }
   }
+
+  countProgress() {
+    print('Хичээлийн урт' + globals.lessons.length.toString());
+    for (int i = 0; i < globals.lessons.length; i++) {
+      if (globals.lessons[i].started == true) {
+        globals.progress++;
+      } else {}
+    }
+  }
 }

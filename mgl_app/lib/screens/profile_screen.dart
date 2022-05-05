@@ -41,6 +41,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget build(BuildContext context) {
     late String _email, _password;
+    DatabaseService().countProgress();
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -131,7 +132,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           svgPath: calculateRank(snapshot.data?.exp ?? 0),
                         ),
                         StatisticWidget(
-                          text: 'Нийт хичээлийн процесс',
+                          text:
+                              'Нийт хичээлийн процесс: ${globals.progress}/40',
                           svgPath: 'assets/svgs/bell-solid 1.svg',
                         ),
                       ],

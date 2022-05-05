@@ -18,3 +18,4 @@ String cali_spe = '';
 String video_key = '';
 
 List<MainLesson> lessons = [];
+int progress = 0;
