@@ -118,11 +118,13 @@ class DatabaseService {
   }
 
   countProgress() {
-    print('Хичээлийн урт' + globals.lessons.length.toString());
+    //print('Хичээлийн урт' + globals.lessons.length.toString());
     for (int i = 0; i < globals.lessons.length; i++) {
       if (globals.lessons[i].started == true) {
         globals.progress++;
       } else {}
     }
   }
+
+  updateCalli(String key) {}
 }

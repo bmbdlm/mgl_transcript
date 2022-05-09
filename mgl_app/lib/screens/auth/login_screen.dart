@@ -4,11 +4,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 //import 'package:flutter_svg/svg.dart';
 import 'package:mgl_app/constants.dart';
 import 'package:mgl_app/screens/auth/register_screen.dart';
 import 'package:mgl_app/screens/main_screen.dart';
 import 'package:mgl_app/data/globals.dart' as globals;
+
+import '../../data/globals.dart';
 //import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -20,6 +23,28 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   late String _email, _password;
+
+  Future<User?> signup(BuildContext context) async {
+    final GoogleSignIn googleSignIn = GoogleSignIn();
+    final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
+    if (googleSignInAccount != null) {
+      final GoogleSignInAuthentication googleSignInAuthentication =
+          await googleSignInAccount.authentication;
+      final AuthCredential authCredential = GoogleAuthProvider.credential(
+          idToken: googleSignInAuthentication.idToken,
+          accessToken: googleSignInAuthentication.accessToken);
+
+      UserCredential result =
+          await globals.auth.signInWithCredential(authCredential);
+      User? user = result.user;
+
+      if (result != null) {
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => MainScreen()));
+        return user;
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,10 +127,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Container(
-                        height: 50.0,
-                        width: 50.0,
-                        child: SvgPicture.asset('assets/svgs/google.svg'),
+                      GestureDetector(
+                        onTap: () => {signup(context)},
+                        child: Container(
+                          height: 50.0,
+                          width: 50.0,
+                          child: SvgPicture.asset('assets/svgs/google.svg'),
+                        ),
                       ),
                       Container(
                         height: 48.0,

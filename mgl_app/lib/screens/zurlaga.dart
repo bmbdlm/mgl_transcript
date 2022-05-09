@@ -21,7 +21,7 @@ class Zurlaga extends StatefulWidget {
 
 class _Zurlaga extends State<Zurlaga> {
   List<Offset> points = [];
-  Uint8List jurag = base64Decode(globals.cali_key);
+  Uint8List zurag = base64Decode(globals.cali_key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,6 +32,7 @@ class _Zurlaga extends State<Zurlaga> {
             Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
           Column(
             children: [
+              // ignore: prefer_const_constructors
               Text(
                 "Дараах зурлагыг дагаад зураарай.",
                 style: TextStyle(
@@ -57,7 +58,7 @@ class _Zurlaga extends State<Zurlaga> {
                 decoration: BoxDecoration(
                     //border: Border.all(color: Colors.black),
                     ),
-                child: Image.memory(jurag),
+                child: Image.memory(zurag),
               ),
               Container(
                 width: 300,

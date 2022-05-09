@@ -44,7 +44,6 @@ class CaliScreen extends StatelessWidget {
                           child: Center(
                             child: Text(
                               '${data.docs[index]['text']}',
-                              //'${data.docs[index].id}',
                               style: TextStyle(
                                 fontSize: 16.0,
                                 fontFamily: 'Nunito',

@@ -18,13 +18,14 @@ class _QuizTestState extends State<QuizTest> {
   Color isWrong = Colors.red;
   Color btnColor = Colors.white;
   int score = 0;
+  int health = 5;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.all(18.0),
         child: PageView.builder(
-            //physics: const NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             controller: _controller!,
             onPageChanged: (page) {
               setState(() {
@@ -76,16 +77,25 @@ class _QuizTestState extends State<QuizTest> {
                         height: 52,
                         margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
                         child: MaterialButton(
-                          color: isPresssed
-                              ? globals.questions[index].answers!.entries
-                                      .toList()[i]
-                                      .value
-                                  ? isTrue
-                                  : isWrong
-                              : Colors.white,
+                          color:
+                              //isPresssed
+                              // ? globals.questions[index].answers!.entries
+                              //         .toList()[i]
+                              //         .value
+                              //     ? isTrue
+                              //     : isWrong
+                              Colors.white,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
-                              side: BorderSide(color: Colors.black)),
+                              side: BorderSide(
+                                  color: isPresssed
+                                      ? globals
+                                              .questions[index].answers!.entries
+                                              .toList()[i]
+                                              .value
+                                          ? isTrue
+                                          : isWrong
+                                      : Colors.white)),
                           onPressed: isPresssed
                               ? () {}
                               : () {
@@ -96,7 +106,7 @@ class _QuizTestState extends State<QuizTest> {
                                       .toList()[i]
                                       .value) {
                                     score += 10;
-                                    print(score);
+                                    //print(score);
                                   }
                                 },
                           child: Text(
@@ -104,37 +114,80 @@ class _QuizTestState extends State<QuizTest> {
                             style: TextStyle(
                                 fontFamily: 'Nunito',
                                 fontWeight: FontWeight.w800,
-                                fontSize: 20.0),
+                                fontSize: 20.0,
+                                color: isPresssed
+                                    ? globals.questions[index].answers!.entries
+                                            .toList()[i]
+                                            .value
+                                        ? isTrue
+                                        : isWrong
+                                    : Colors.black),
                           ),
                         ),
                       ),
                     SizedBox(
-                      height: 60.0,
+                      height: 120.0,
                     ),
-                    OutlinedButton(
-                        onPressed: () {
-                          print(isPresssed);
-                          isPresssed
-                              ? _controller!.nextPage(
-                                  duration: Duration(milliseconds: 1000),
-                                  curve: Curves.easeIn)
-                              : null;
-                        },
-                        child: Text(
-                          index + 1 == globals.questions.length
-                              ? "Шалгалтын дүн харах"
-                              : "Шалгах",
-                          style: TextStyle(color: Colors.black),
-                        ))
+                    Container(
+                      width: 300,
+                      height: 55,
+                      child: OutlinedButton(
+                          onPressed:
+                              //() {
+                              isPresssed
+                                  ? () {
+                                      if (index + 1 ==
+                                          globals.questions.length) {
+                                        print("shalgalt duussan");
+                                        ShowDialog(context, 60);
+                                      } else {
+                                        _controller!.nextPage(
+                                            duration:
+                                                Duration(milliseconds: 1000),
+                                            curve: Curves.easeIn);
+                                      }
+                                    }
+                                  // _controller!.nextPage(
+                                  //     duration: Duration(milliseconds: 1000),
+                                  //     curve: Curves.easeIn)
+                                  : null,
+                          //},
+                          child: Text(
+                            index + 1 == globals.questions.length
+                                ? "Шалгалт дуусгах"
+                                : "Дараагийнх",
+                            style: TextStyle(color: Colors.black),
+                          )),
+                    )
                   ],
                 );
               } else {
                 return Container(
-                  child: Text('hooson'),
+                  child: Text('Loading...'),
                 );
               }
             }),
       ),
     );
   }
+}
+
+ShowDialog(BuildContext context, int exp) {
+  Widget okButton = TextButton(
+    child: Text("Ок"),
+    onPressed: () {},
+  );
+  AlertDialog alert = AlertDialog(
+    title: Text("Танд баяр хүргэе. Та нийт ${exp} Xp цуглууллаа."),
+    content: Text(''),
+    actions: [
+      okButton,
+    ],
+  );
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

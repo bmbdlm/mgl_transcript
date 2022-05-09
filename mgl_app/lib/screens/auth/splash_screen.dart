@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   startTimer() async {
-    var duration = const Duration(seconds: 1);
+    var duration = const Duration(seconds: 5);
     return Timer(duration, route);
   }
 
@@ -39,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
           child: RotatedBox(
             quarterTurns: 1,
             child: Text(
-              'ᠠᠫᠫᠯᠢᠭ ᠢᠶᠢᠰᠢᠨ ᠤ ᠨᠡᠷ᠎ᠡ',
+              ' ᠮᠣᠩᠭᠣᠯ ᠪᠢᠴᠢᠭ',
               style: TextStyle(
                 fontSize: 36,
                 color: Colors.white,

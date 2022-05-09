@@ -30,8 +30,6 @@ class HomeScreen extends StatelessWidget {
             return const Text('Loading');
           }
           final data = snapshot.requireData;
-          // final rawData = snapshot.requireData;
-          // final data = isSorting ? rawData.docs.reversed.toList : rawData.docs;
 
           //Irsen secondoo minut ruu hurwvvleh
           String formatedTime(int secTime) {
@@ -73,6 +71,14 @@ class HomeScreen extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
+                    //color: Colors.white,
+                    // boxShadow: [
+                    //   BoxShadow(
+                    //     color: Colors.grey.withOpacity(0.5),
+                    //     blurRadius: 4,
+                    //     offset: Offset(4, 8),
+                    //   )
+                    // ]
                     color: const Color.fromRGBO(229, 229, 229, 0.5),
                   ),
                   padding: const EdgeInsets.all(20),
