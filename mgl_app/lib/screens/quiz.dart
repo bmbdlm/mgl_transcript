@@ -2,7 +2,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:mgl_app/data/database.dart';
 import 'package:mgl_app/data/globals.dart' as globals;
+
+import 'exam_screen.dart';
+import 'exams.dart';
 
 class QuizTest extends StatefulWidget {
   const QuizTest({Key? key}) : super(key: key);
@@ -138,7 +142,6 @@ class _QuizTestState extends State<QuizTest> {
                                   ? () {
                                       if (index + 1 ==
                                           globals.questions.length) {
-                                        print("shalgalt duussan");
                                         ShowDialog(context, 60);
                                       } else {
                                         _controller!.nextPage(
@@ -147,9 +150,6 @@ class _QuizTestState extends State<QuizTest> {
                                             curve: Curves.easeIn);
                                       }
                                     }
-                                  // _controller!.nextPage(
-                                  //     duration: Duration(milliseconds: 1000),
-                                  //     curve: Curves.easeIn)
                                   : null,
                           //},
                           child: Text(
@@ -175,7 +175,21 @@ class _QuizTestState extends State<QuizTest> {
 ShowDialog(BuildContext context, int exp) {
   Widget okButton = TextButton(
     child: Text("Ок"),
-    onPressed: () {},
+    onPressed: () async {
+      print("userId:" + globals.auth.currentUser!.uid.toString());
+      print("exp:" + globals.global_user.exp.toString());
+      DatabaseService().updateExp(
+          globals.auth.currentUser!.uid, globals.global_user.exp + exp);
+      DatabaseService().examDone(globals.exam_id, true);
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ExamsScreen(),
+        ),
+      );
+      //Navigator.of(context).pop();
+    },
   );
   AlertDialog alert = AlertDialog(
     title: Text("Танд баяр хүргэе. Та нийт ${exp} Xp цуглууллаа."),

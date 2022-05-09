@@ -83,8 +83,8 @@ class ExamsScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: SizedBox(
-                          width: 10,
-                          height: 10,
+                          width: 30,
+                          height: 30,
                           child: SvgPicture.asset(
                             'assets/svgs/arrow-right-solid 1.svg',
                           ),
@@ -112,6 +112,7 @@ showAlertDialog(BuildContext context, String examId, int exp) {
   Widget okButton = TextButton(
     child: Text("Тийм"),
     onPressed: () async {
+      globals.exam_id = examId;
       await DatabaseService().getQuestions(examId);
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (context) => QuizTest()));

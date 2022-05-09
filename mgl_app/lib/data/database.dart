@@ -18,7 +18,6 @@ class DatabaseService {
           .get();
 
       if (ds.exists) {
-        //print(ds.data());
         final MyUser userz = MyUser(
             ds.get('daysStreak'),
             ds.get('exp'),
@@ -29,6 +28,7 @@ class DatabaseService {
             ds.get('registrationDate'),
             ds.get('skipped'),
             ds.get('skippedDays'));
+        globals.global_user = userz;
         return userz;
       } else {
         print('Document does not exist on the database');
@@ -49,6 +49,20 @@ class DatabaseService {
       'skippedDays': 0
     });
     String uid = globals.auth.currentUser!.uid.toString();
+  }
+
+  Future<void> updateExp(String userId, int exp) async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .update({'exp': exp});
+  }
+
+  Future<void> examDone(String examID, bool isDone) async {
+    await FirebaseFirestore.instance
+        .collection('exams')
+        .doc(examID)
+        .update({'completed': isDone});
   }
 
   Future<void> getQuestions(String examid) async {
