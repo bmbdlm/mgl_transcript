@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:mgl_app/data/database.dart';
 import 'package:mgl_app/data/globals.dart' as globals;
 
@@ -43,16 +44,41 @@ class _QuizTestState extends State<QuizTest> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(
-                      width: double.infinity,
-                      child: Text(
-                        'Асуулт ${index + 1}/${globals.questions.length}',
-                        style: TextStyle(
-                          fontFamily: 'Nunito',
-                          fontWeight: FontWeight.w700,
-                          fontSize: 21.0,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          width: 150,
+                          child: Text(
+                            'Асуулт ${index + 1}/${globals.questions.length}',
+                            style: TextStyle(
+                              fontFamily: 'Nunito',
+                              fontWeight: FontWeight.w700,
+                              fontSize: 21.0,
+                            ),
+                          ),
                         ),
-                      ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 28.0,
+                              width: 28.0,
+                              child: SvgPicture.asset(
+                                'assets/svgs/heart-solid 1.svg',
+                                color: const Color(0xFFEF476F),
+                              ),
+                            ),
+                            const SizedBox(width: 10.0),
+                            Text('${globals.global_user.health}',
+                                style: TextStyle(
+                                    color: Color(0xFFEF476F),
+                                    fontFamily: 'Nunito',
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 18.0)),
+                            const SizedBox(width: 10.0),
+                          ],
+                        ),
+                      ],
                     ),
                     Divider(
                       color: Colors.black,
@@ -111,6 +137,8 @@ class _QuizTestState extends State<QuizTest> {
                                       .value) {
                                     score += 10;
                                     //print(score);
+                                  } else {
+                                    globals.global_user.health -= 1;
                                   }
                                 },
                           child: Text(
@@ -182,12 +210,21 @@ ShowDialog(BuildContext context, int exp) {
           globals.auth.currentUser!.uid, globals.global_user.exp + exp);
       DatabaseService().examDone(globals.exam_id, true);
 
-      Navigator.pushReplacement(
-        context,
+      Navigator.of(context).push(
         MaterialPageRoute(
+          settings: RouteSettings(name: "/Page1"),
           builder: (context) => ExamsScreen(),
         ),
       );
+      //print(ModalRoute.of(context)?.settings.name);
+
+      // Navigator.pushReplacement(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => ExamsScreen(),
+      //   ),
+      // );
+
       //Navigator.of(context).pop();
     },
   );
