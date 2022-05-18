@@ -66,6 +66,7 @@ class DatabaseService {
   }
 
   Future<void> getQuestions(String examid) async {
+    globals.questions = [];
     QuerySnapshot querySnapshot = await
         //print(examid);
         FirebaseFirestore.instance
@@ -117,8 +118,9 @@ class DatabaseService {
         .orderBy('number')
         .get();
     print(sn.size);
+
+    print(globals.lessons);
     for (int i = 0; i < sn.size; i++) {
-      //print(sn.docs[i]['watchedTime']);
       MainLesson tmp = new MainLesson(
           sn.docs[i]['content'],
           sn.docs[i]['name'],
@@ -132,7 +134,6 @@ class DatabaseService {
   }
 
   countProgress() {
-    //print('Хичээлийн урт' + globals.lessons.length.toString());
     for (int i = 0; i < globals.lessons.length; i++) {
       if (globals.lessons[i].started == true) {
         globals.progress++;
@@ -140,5 +141,18 @@ class DatabaseService {
     }
   }
 
-  updateCalli(String key) {}
+  openNextLesson(String lessonId) async {
+    await FirebaseFirestore.instance
+        .collection('Lesson')
+        .doc(lessonId)
+        .update({'started': true});
+  }
+
+  insertMistake(String questionId, String userId, String mistakeId) async {
+    await FirebaseFirestore.instance.collection('mistake').doc(mistakeId).set({
+      'mistakeID': mistakeId,
+      'userID': userId,
+      'questionID': questionId,
+    });
+  }
 }

@@ -24,6 +24,7 @@ class _QuizTestState extends State<QuizTest> {
   Color btnColor = Colors.white;
   int score = 0;
   int health = 5;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -170,11 +171,13 @@ class _QuizTestState extends State<QuizTest> {
                                   ? () {
                                       if (index + 1 ==
                                           globals.questions.length) {
-                                        ShowDialog(context, 60);
+                                        Navigator.pop(context);
+                                        Navigator.pop(context);
+                                        // ShowDialog(context, 60);
                                       } else {
                                         _controller!.nextPage(
                                             duration:
-                                                Duration(milliseconds: 1000),
+                                                Duration(milliseconds: 500),
                                             curve: Curves.easeIn);
                                       }
                                     }
@@ -200,7 +203,7 @@ class _QuizTestState extends State<QuizTest> {
   }
 }
 
-ShowDialog(BuildContext context, int exp) {
+void ShowDialog(BuildContext context, int exp) {
   Widget okButton = TextButton(
     child: Text("Ок"),
     onPressed: () async {
@@ -210,12 +213,20 @@ ShowDialog(BuildContext context, int exp) {
           globals.auth.currentUser!.uid, globals.global_user.exp + exp);
       DatabaseService().examDone(globals.exam_id, true);
 
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          settings: RouteSettings(name: "/Page1"),
-          builder: (context) => ExamsScreen(),
-        ),
-      );
+      // Navigator.of(context).push(
+      //   MaterialPageRoute(
+      //     settings: RouteSettings(name: ""),
+      //     builder: (context) => ExamsScreen(),
+      //   ),
+      // );
+      // int count = 0;
+      // Navigator.of(context).popUntil((_) {
+      //   return count++ >= 2;
+
+      // });
+      Navigator.pop(context);
+      // Navigator.pop(context);
+      // Navigator.pop(context);
       //print(ModalRoute.of(context)?.settings.name);
 
       // Navigator.pushReplacement(

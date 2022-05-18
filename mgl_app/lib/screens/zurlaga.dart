@@ -32,7 +32,6 @@ class _Zurlaga extends State<Zurlaga> {
             Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
           Column(
             children: [
-              // ignore: prefer_const_constructors
               Text(
                 "Дараах зурлагыг дагаад зураарай.",
                 style: TextStyle(
@@ -87,16 +86,6 @@ class _Zurlaga extends State<Zurlaga> {
               ),
             ],
           ),
-          //width: 300,
-          //height: 450,
-
-          // Container(
-          //   height: 450,
-          //   decoration: BoxDecoration(
-          //       //border: Border.all(color: Colors.black),
-          //       ),
-          //   child: Image.memory(jurag),
-          // ),
           GestureDetector(
             onTap: () {
               Navigator.of(context).pop();
