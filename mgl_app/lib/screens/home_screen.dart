@@ -7,8 +7,6 @@ import 'package:mgl_app/data/database.dart';
 import 'package:mgl_app/screens/video_player.dart';
 import 'package:mgl_app/data/globals.dart' as globals;
 
-//import 'package:mgl_app/constants.dart';
-
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
   final Stream<QuerySnapshot> lessons = FirebaseFirestore.instance
@@ -71,14 +69,6 @@ class HomeScreen extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    //color: Colors.white,
-                    // boxShadow: [
-                    //   BoxShadow(
-                    //     color: Colors.grey.withOpacity(0.5),
-                    //     blurRadius: 4,
-                    //     offset: Offset(4, 8),
-                    //   )
-                    // ]
                     color: const Color.fromRGBO(229, 229, 229, 0.5),
                   ),
                   padding: const EdgeInsets.all(20),
@@ -98,9 +88,6 @@ class HomeScreen extends StatelessWidget {
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                           ),
-                          // child: SvgPicture.asset(
-                          //   'assets/svgs/circle-play-solid 8.svg',
-                          // ),
                           child: (data.docs[index]['started'])
                               ? SvgPicture.asset(
                                   'assets/svgs/circle-play-solid 8.svg')

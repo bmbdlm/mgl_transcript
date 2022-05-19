@@ -58,6 +58,13 @@ class DatabaseService {
         .update({'exp': exp});
   }
 
+  Future<void> updateHealth(String userId, int health) async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .update({'health': health});
+  }
+
   Future<void> examDone(String examID, bool isDone) async {
     await FirebaseFirestore.instance
         .collection('exams')
@@ -67,12 +74,10 @@ class DatabaseService {
 
   Future<void> getQuestions(String examid) async {
     globals.questions = [];
-    QuerySnapshot querySnapshot = await
-        //print(examid);
-        FirebaseFirestore.instance
-            .collection('question')
-            .where('examID', isEqualTo: examid)
-            .get();
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('question')
+        .where('examID', isEqualTo: examid)
+        .get();
     ;
     for (var doc in querySnapshot.docs) {
       if (doc['first'] != null &&

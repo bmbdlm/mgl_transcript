@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mgl_app/data/database.dart';
 import 'package:mgl_app/data/globals.dart' as globals;
+import 'package:mgl_app/screens/main_screen.dart';
 
 import 'exam_screen.dart';
 import 'exams.dart';
@@ -23,8 +25,7 @@ class _QuizTestState extends State<QuizTest> {
   Color isWrong = Colors.red;
   Color btnColor = Colors.white;
   int score = 0;
-  int health = 5;
-
+  int heartCount = globals.global_user.health;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,7 +71,7 @@ class _QuizTestState extends State<QuizTest> {
                               ),
                             ),
                             const SizedBox(width: 10.0),
-                            Text('${globals.global_user.health}',
+                            Text('${heartCount}',
                                 style: TextStyle(
                                     color: Color(0xFFEF476F),
                                     fontFamily: 'Nunito',
@@ -108,14 +109,7 @@ class _QuizTestState extends State<QuizTest> {
                         height: 52,
                         margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
                         child: MaterialButton(
-                          color:
-                              //isPresssed
-                              // ? globals.questions[index].answers!.entries
-                              //         .toList()[i]
-                              //         .value
-                              //     ? isTrue
-                              //     : isWrong
-                              Colors.white,
+                          color: Colors.white,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
                               side: BorderSide(
@@ -127,21 +121,24 @@ class _QuizTestState extends State<QuizTest> {
                                           ? isTrue
                                           : isWrong
                                       : Colors.white)),
-                          onPressed: isPresssed
-                              ? () {}
-                              : () {
-                                  setState(() {
-                                    isPresssed = true;
-                                  });
-                                  if (globals.questions[index].answers!.entries
-                                      .toList()[i]
-                                      .value) {
-                                    score += 10;
-                                    //print(score);
-                                  } else {
-                                    globals.global_user.health -= 1;
-                                  }
-                                },
+                          onPressed: () {
+                            if (!isPresssed) {
+                              if (globals.questions[index].answers!.entries
+                                  .toList()[i]
+                                  .value) {
+                                score += 10;
+                                //print(score);
+                              } else {
+                                setState(() {
+                                  heartCount--;
+                                });
+                                //globals.lifeChangeStream.sink.add(1);
+                              }
+                              setState(() {
+                                isPresssed = true;
+                              });
+                            }
+                          },
                           child: Text(
                             globals.questions[index].answers!.keys.toList()[i],
                             style: TextStyle(
@@ -171,9 +168,19 @@ class _QuizTestState extends State<QuizTest> {
                                   ? () {
                                       if (index + 1 ==
                                           globals.questions.length) {
+                                        globals.global_user.exp += 60;
+                                        globals.lifeChangeStream.sink.add(
+                                            globals.global_user.health -
+                                                heartCount);
+                                        DatabaseService().updateHealth(
+                                            globals.auth.currentUser!.uid,
+                                            heartCount);
+                                        DatabaseService().updateExp(
+                                            globals.auth.currentUser!.uid,
+                                            globals.global_user.exp);
+
                                         Navigator.pop(context);
                                         Navigator.pop(context);
-                                        // ShowDialog(context, 60);
                                       } else {
                                         _controller!.nextPage(
                                             duration:
@@ -207,36 +214,11 @@ void ShowDialog(BuildContext context, int exp) {
   Widget okButton = TextButton(
     child: Text("Ок"),
     onPressed: () async {
-      print("userId:" + globals.auth.currentUser!.uid.toString());
-      print("exp:" + globals.global_user.exp.toString());
+      // print("userId:" + globals.auth.currentUser!.uid.toString());
+      // print("exp:" + globals.global_user.exp.toString());
       DatabaseService().updateExp(
           globals.auth.currentUser!.uid, globals.global_user.exp + exp);
       DatabaseService().examDone(globals.exam_id, true);
-
-      // Navigator.of(context).push(
-      //   MaterialPageRoute(
-      //     settings: RouteSettings(name: ""),
-      //     builder: (context) => ExamsScreen(),
-      //   ),
-      // );
-      // int count = 0;
-      // Navigator.of(context).popUntil((_) {
-      //   return count++ >= 2;
-
-      // });
-      Navigator.pop(context);
-      // Navigator.pop(context);
-      // Navigator.pop(context);
-      //print(ModalRoute.of(context)?.settings.name);
-
-      // Navigator.pushReplacement(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (context) => ExamsScreen(),
-      //   ),
-      // );
-
-      //Navigator.of(context).pop();
     },
   );
   AlertDialog alert = AlertDialog(

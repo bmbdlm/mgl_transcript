@@ -1,5 +1,8 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_const
 
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mgl_app/constants.dart';
@@ -14,16 +17,61 @@ import 'home_screen.dart';
 
 class MainScreen extends StatefulWidget {
   MainScreen({Key? key}) : super(key: key);
-
   final user = globals.auth.currentUser;
+  int health = globals.global_user.health;
 
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
-  //MyUser authenticatedUser = await DatabaseService().getData();
   int _currentIndex = 0;
+  int _counter = 900;
+  late Timer _timer;
+
+  void _startTimer() {
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
+        if (_counter > 0) {
+          _counter--;
+        } else {
+          globals.global_user.health += 1;
+          _timer.cancel();
+        }
+      });
+    });
+  }
+
+  String formatTime(int secondz) {
+    String getParsedTime(String time) {
+      if (time.length <= 1) return "0$time";
+      return time;
+    }
+
+    int min = secondz ~/ 60;
+    int sec = secondz % 60;
+
+    String parsedTime =
+        getParsedTime(min.toString()) + " : " + getParsedTime(sec.toString());
+
+    return parsedTime;
+  }
+
+  @override
+  void initState() {
+    globals.lifeChangeStream.stream.listen((event) {
+      print(event.abs());
+      _startTimer();
+      // if (_counter == 0) {
+      //   _counter = 900;
+      //   _startTimer();
+      // } else {
+      //   _counter = _counter + 900;
+      // }
+    });
+    super.initState();
+  }
+
   final _screens = [
     HomeScreen(),
     CaliScreen(),
@@ -42,7 +90,6 @@ class _MainScreenState extends State<MainScreen> {
               ),
             ),
             label: ''),
-        // BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
         BottomNavigationBarItem(
             icon: SizedBox(
               height: 35.0,
@@ -53,7 +100,6 @@ class _MainScreenState extends State<MainScreen> {
               ),
             ),
             label: ''),
-
         BottomNavigationBarItem(
             icon: SizedBox(
               height: 35.0,
@@ -128,7 +174,14 @@ class _MainScreenState extends State<MainScreen> {
                               ),
                             ),
                             const SizedBox(width: 8.0),
-                            Text('${snapshot.data?.health}',
+                            Text('${globals.global_user.health}',
+                                style: TextStyle(
+                                    color: Color(0xFFEF476F),
+                                    fontFamily: 'Nunito',
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 18.0)),
+                            const SizedBox(width: 8.0),
+                            Text('(${formatTime(_counter)})',
                                 style: TextStyle(
                                     color: Color(0xFFEF476F),
                                     fontFamily: 'Nunito',

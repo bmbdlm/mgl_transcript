@@ -203,42 +203,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             )
                           ],
                         ),
-                        // Divider(
-                        //   thickness: 2,
-                        //   indent: 0,
-                        //   endIndent: 0,
-                        //   color: Color.fromARGB(196, 196, 196, 196),
-                        // ),
-                        // GestureDetector(
-                        //   onTap: () => {
-                        //     Navigator.of(context).pushReplacement(
-                        //         MaterialPageRoute(
-                        //             builder: (context) => ChangeInfo())),
-                        //     globals.user = snapshot.data?.name ?? '',
-                        //   },
-                        //   child: Row(
-                        //     children: [
-                        //       SizedBox(
-                        //         height: 20.0,
-                        //         width: 20.0,
-                        //         child: SvgPicture.asset(
-                        //           'assets/svgs/fire-solid 2.svg',
-                        //         ),
-                        //       ),
-                        //       SizedBox(
-                        //         width: 15,
-                        //       ),
-                        //       Text(
-                        //         'Мэдээлэл өөрчлөх',
-                        //         style: TextStyle(
-                        //             fontSize: 14.0,
-                        //             fontFamily: 'Nunito',
-                        //             fontWeight: FontWeight.w800),
-                        //         textAlign: TextAlign.left,
-                        //       ),
-                        //     ],
-                        //   ),
-                        // ),
                         Divider(
                           thickness: 2,
                           indent: 0,
@@ -288,7 +252,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
 @override
 State<StatefulWidget> createState() {
-  // TODO: implement createState
   throw UnimplementedError();
 }
 
